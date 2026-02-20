@@ -2,16 +2,15 @@
   <img src="./img.png" alt="Project Banner" width="100%">
 </p>
 
-# SAKHI (सखी) - Women's Health Companion 🌸
+# SAKHI - Women's Health Companion 🌸
 
 ## Basic Details
 
-### Team Name: [Your Team Name]
+### Team Name: Binary Sisters 
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Member 1: Nima Fathima - Adi Shankara Institute of Engineering Technology, Kalady
+- Member 2: Swaliha C A - Adi Shankara Institute of Engineering Technology, Kalady
 
 ### Hosted Project Link
 **Live Demo:** [Open Demo](demo/index.html)  
