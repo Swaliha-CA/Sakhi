@@ -1,4 +1,6 @@
-<p align="center"><img src="./demo/assets/sakhi-banner.png" alt="SAKHI - Women's Health Companion" width="100%"></p>
+<p align="center">
+  <img src="./img.png" alt="Project Banner" width="100%">
+</p>
 
 # SAKHI (सखी) - Women's Health Companion 🌸
 
