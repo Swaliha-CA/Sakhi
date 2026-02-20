@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakhi - Women's Health Companion | Complete System Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .hero {
+            text-align: center;
+            color: white;
+            padding: 60px 20px 40px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .modules-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .module-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-color: var(--primary);
+        }
+        
+        .module-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .module-card h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .module-card p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .module-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .module-features li {
+            padding: 8px 0;
+            color: #555;
+        }
+        
+        .module-features li i {
+            color: var(--success);
+            margin-right: 10px;
+        }
+        
+        .btn-launch {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-launch:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+        
+        .phase-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .phase-1 { background: #dbeafe; color: #1e40af; }
+        .phase-2 { background: #fef3c7; color: #92400e; }
+        .phase-3 { background: #d1fae5; color: #065f46; }
+        
+        .stats-bar {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 1200px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+        
+        .stat-item h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-item p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1><i class="fas fa-heartbeat"></i> Sakhi - Women's Health Companion</h1>
+        <p>सखी - Your Trusted Health Friend | Complete System Demonstration</p>
+        <div class="stats-bar">
+            <div class="row">
+                <div class="col-md-3 stat-item">
+                    <h2>15</h2>
+                    <p>Complete Modules</p>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <h2>12,847</h2>
+                    <p>Active Users</p>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <h2>36</h2>
+                    <p>Languages</p>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <h2>79%</h2>
+                    <p>AI Accuracy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modules-container">
+        <div class="row">
+
+            <!-- Module 1: OCR & Label Scanning -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/ocr-scanner.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>OCR & Product Label Scanner <span class="phase-badge phase-1">Phase 1</span></h3>
+                    <p>Scan product labels to detect harmful EDCs (Endocrine Disrupting Chemicals) using AI-powered OCR and LLM analysis.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> Multi-language OCR (Hindi, Tamil, Telugu, Bengali)</li>
+                        <li><i class="fas fa-check-circle"></i> LLM-powered ingredient extraction</li>
+                        <li><i class="fas fa-check-circle"></i> Toxicity scoring (0-100 scale)</li>
+                        <li><i class="fas fa-check-circle"></i> Hormonal Health Score calculation</li>
+                    </ul>
+                    <a href="screens/ocr-scanner.html" class="btn-launch">Launch Scanner <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 2: Product Alternatives -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/alternatives.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Safer Product Alternatives <span class="phase-badge phase-1">Phase 1</span></h3>
+                    <p>Find toxin-free alternatives to harmful products with personalized recommendations and shopping lists.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> 500+ safer product database</li>
+                        <li><i class="fas fa-check-circle"></i> Smart ranking by score, price, availability</li>
+                        <li><i class="fas fa-check-circle"></i> Shopping list management</li>
+                        <li><i class="fas fa-check-circle"></i> New product notifications</li>
+                    </ul>
+                    <a href="screens/alternatives.html" class="btn-launch">Browse Alternatives <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 3: EDC Exposure Tracking -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/exposure-tracking.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Cumulative EDC Exposure Tracking <span class="phase-badge phase-1">Phase 1</span></h3>
+                    <p>Monitor cumulative exposure to harmful chemicals and compare against EPA safe limits.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> Aggregate exposure by EDC type</li>
+                        <li><i class="fas fa-check-circle"></i> EPA safe limit comparison</li>
+                        <li><i class="fas fa-check-circle"></i> Monthly exposure reports</li>
+                        <li><i class="fas fa-check-circle"></i> Personalized reduction strategies</li>
+                    </ul>
+                    <a href="screens/exposure-tracking.html" class="btn-launch">View Exposure <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 4: Voice AI Interface -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/voice-ai.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h3>Voice AI Health Screening <span class="phase-badge phase-2">Phase 2</span></h3>
+                    <p>Voice-first interface for EPDS and PHQ-9 screenings in 36+ Indic languages with offline support.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> Bhashini voice integration</li>
+                        <li><i class="fas fa-check-circle"></i> EPDS & PHQ-9 screenings</li>
+                        <li><i class="fas fa-check-circle"></i> Nutritional logging via voice</li>
+                        <li><i class="fas fa-check-circle"></i> Offline mode for top 5 languages</li>
+                    </ul>
+                    <a href="screens/voice-ai.html" class="btn-launch">Start Voice Screening <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 5: PPD Prediction -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/ppd-prediction-interactive.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>PPD Risk Prediction AI <span class="phase-badge phase-2">Phase 2</span> <span class="badge bg-success">INTERACTIVE</span></h3>
+                    <p>AI-powered postpartum depression risk assessment using multi-factor analysis (79% accuracy).</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> 5-factor weighted model</li>
+                        <li><i class="fas fa-check-circle"></i> Real-time risk calculation</li>
+                        <li><i class="fas fa-check-circle"></i> Automated ASHA alerts</li>
+                        <li><i class="fas fa-check-circle"></i> Personalized recommendations</li>
+                    </ul>
+                    <a href="screens/ppd-prediction-interactive.html" class="btn-launch">Calculate Risk <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 6: Micronutrient Tracking -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/micronutrients.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Micronutrient Tracking <span class="phase-badge phase-2">Phase 2</span></h3>
+                    <p>Track lab results, detect deficiencies, and monitor trends for hemoglobin, B12, folate, and more.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> Lab result logging</li>
+                        <li><i class="fas fa-check-circle"></i> Deficiency detection & alerts</li>
+                        <li><i class="fas fa-check-circle"></i> Trend analysis over time</li>
+                        <li><i class="fas fa-check-circle"></i> Correlation with mood data</li>
+                    </ul>
+                    <a href="screens/micronutrients.html" class="btn-launch">Track Nutrients <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 7: Sutika Paricharya -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/sutika.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #ec4899, #db2777);">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Sutika Paricharya (Postpartum Care) <span class="phase-badge phase-2">Phase 2</span></h3>
+                    <p>45-day Ayurvedic postpartum recovery with regional food recommendations and heritage recipes.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> 45-day recovery regimen</li>
+                        <li><i class="fas fa-check-circle"></i> Regional food database</li>
+                        <li><i class="fas fa-check-circle"></i> Heritage recipe sharing</li>
+                        <li><i class="fas fa-check-circle"></i> Daily voice-guided check-ins</li>
+                    </ul>
+                    <a href="screens/sutika.html" class="btn-launch">Start Recovery <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 8: ASHA Dashboard -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/asha-dashboard-interactive.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                        <i class="fas fa-hospital-user"></i>
+                    </div>
+                    <h3>ASHA Worker Dashboard <span class="phase-badge phase-3">Phase 3</span> <span class="badge bg-success">INTERACTIVE</span></h3>
+                    <p>Case management interface for ASHA workers with prioritized caseload and real-time alerts.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> Caseload management (30-40 patients)</li>
+                        <li><i class="fas fa-check-circle"></i> High-risk case prioritization</li>
+                        <li><i class="fas fa-check-circle"></i> Intervention logging</li>
+                        <li><i class="fas fa-check-circle"></i> Real-time alert system</li>
+                    </ul>
+                    <a href="screens/asha-dashboard-interactive.html" class="btn-launch">Open Dashboard <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 9: Climate-Health Shield -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/climate-shield.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #f97316, #ea580c);">
+                        <i class="fas fa-temperature-high"></i>
+                    </div>
+                    <h3>Climate-Health Shield <span class="phase-badge phase-3">Phase 3</span></h3>
+                    <p>WBGT-based heat stress monitoring and WASH resource mapping for disaster preparedness.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> WBGT heat index calculation</li>
+                        <li><i class="fas fa-check-circle"></i> Work-rest cycle recommendations</li>
+                        <li><i class="fas fa-check-circle"></i> WASH facility mapping</li>
+                        <li><i class="fas fa-check-circle"></i> Disaster preparedness alerts</li>
+                    </ul>
+                    <a href="screens/climate-shield.html" class="btn-launch">Check Heat Risk <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 10: Buddy System -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/buddy-system.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #14b8a6, #0d9488);">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>Buddy System (Elder Support) <span class="phase-badge phase-3">Phase 3</span></h3>
+                    <p>Link elder women with digital helpers for data logging and dual notifications.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> Profile linking with consent</li>
+                        <li><i class="fas fa-check-circle"></i> Helper data logging</li>
+                        <li><i class="fas fa-check-circle"></i> Dual notification system</li>
+                        <li><i class="fas fa-check-circle"></i> Heritage recipe sharing</li>
+                    </ul>
+                    <a href="screens/buddy-system.html" class="btn-launch">Link Buddy <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 11: Offline Sync -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/offline-sync.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Offline-First Synchronization <span class="phase-badge phase-2">Phase 2</span></h3>
+                    <p>SQLite-based offline storage with ABHA ID integration for seamless data portability.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> Local SQLite storage</li>
+                        <li><i class="fas fa-check-circle"></i> Bidirectional sync</li>
+                        <li><i class="fas fa-check-circle"></i> ABHA ID integration</li>
+                        <li><i class="fas fa-check-circle"></i> Conflict resolution</li>
+                    </ul>
+                    <a href="screens/offline-sync.html" class="btn-launch">Manage Sync <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 12: Population Health Analytics -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/analytics.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #a855f7, #9333ea);">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Population Health Analytics <span class="phase-badge phase-3">Phase 3</span></h3>
+                    <p>Anonymized data analytics for public health authorities with predictive insights.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> Regional prevalence mapping</li>
+                        <li><i class="fas fa-check-circle"></i> EDC-PCOS correlation analysis</li>
+                        <li><i class="fas fa-check-circle"></i> Predictive modeling</li>
+                        <li><i class="fas fa-check-circle"></i> K-anonymity compliance</li>
+                    </ul>
+                    <a href="screens/analytics.html" class="btn-launch">View Analytics <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 13: Notifications System -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/notifications.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #f43f5e, #e11d48);">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Smart Notification System <span class="phase-badge phase-1">Phase 1</span></h3>
+                    <p>Multi-channel notifications for health alerts, product updates, and appointment reminders.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> Risk-based alerts</li>
+                        <li><i class="fas fa-check-circle"></i> New product notifications</li>
+                        <li><i class="fas fa-check-circle"></i> Appointment reminders</li>
+                        <li><i class="fas fa-check-circle"></i> Customizable preferences</li>
+                    </ul>
+                    <a href="screens/notifications.html" class="btn-launch">View Notifications <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 14: System Architecture -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/architecture.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #64748b, #475569);">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>System Architecture Overview</h3>
+                    <p>Technical architecture, data flow, and integration points of the complete platform.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> Microservices architecture</li>
+                        <li><i class="fas fa-check-circle"></i> Database schema</li>
+                        <li><i class="fas fa-check-circle"></i> API endpoints</li>
+                        <li><i class="fas fa-check-circle"></i> Security & compliance</li>
+                    </ul>
+                    <a href="screens/architecture.html" class="btn-launch">View Architecture <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Module 15: Implementation Status -->
+            <div class="col-lg-6">
+                <div class="module-card" onclick="window.location.href='screens/implementation.html'">
+                    <div class="module-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>Implementation Status & Roadmap</h3>
+                    <p>Complete task breakdown, testing coverage, and phased rollout strategy.</p>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> 15 major tasks completed</li>
+                        <li><i class="fas fa-check-circle"></i> 50+ properties tested</li>
+                        <li><i class="fas fa-check-circle"></i> 3-phase rollout plan</li>
+                        <li><i class="fas fa-check-circle"></i> Research validation</li>
+                    </ul>
+                    <a href="screens/implementation.html" class="btn-launch">View Status <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Access Bar -->
+        <div class="text-center mt-5 mb-4">
+            <div class="bg-white rounded-4 p-4 shadow-lg" style="max-width: 800px; margin: 0 auto;">
+                <h4 class="mb-3">Quick Access</h4>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="http://localhost:8000/docs" target="_blank" class="btn btn-outline-primary">
+                        <i class="fas fa-code"></i> API Documentation
+                    </a>
+                    <a href="http://localhost:8000/health" target="_blank" class="btn btn-outline-success">
+                        <i class="fas fa-heartbeat"></i> Health Check
+                    </a>
+                    <a href="../IMPLEMENTATION_STATUS.md" target="_blank" class="btn btn-outline-info">
+                        <i class="fas fa-file-alt"></i> Implementation Docs
+                    </a>
+                    <a href="../.kiro/specs/women-health-ledger/design.md" target="_blank" class="btn btn-outline-warning">
+                        <i class="fas fa-book"></i> Design Document
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Animate stats on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const stats = document.querySelectorAll('.stat-item h2');
+            stats.forEach(stat => {
+                const finalValue = stat.textContent;
+                stat.textContent = '0';
+                animateValue(stat, 0, parseInt(finalValue.replace(/,/g, '')), 2000, finalValue.includes(','));
+            });
+        });
+
+        function animateValue(element, start, end, duration, useComma) {
+            const range = end - start;
+            const increment = range / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= end) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                element.textContent = useComma ? Math.floor(current).toLocaleString() : Math.floor(current) + (element.textContent.includes('%') ? '%' : '');
+            }, 16);
+        }
+    </script>
+</body>
+</html>

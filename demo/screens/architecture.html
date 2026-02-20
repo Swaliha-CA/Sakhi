@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Architecture | She - Women's Health Ledger</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #64748b, #64748bdd);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .content {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .header-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+        .demo-area {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            min-height: 400px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .btn-custom {
+            background: #64748b;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-arrow-left"></i> Back to Modules
+            </a>
+            <span class="navbar-text text-white">
+                <i class="fas fa-project-diagram"></i> System Architecture
+            </span>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="header-card">
+            <h1><i class="fas fa-project-diagram" style="color: #64748b;"></i> System Architecture</h1>
+            <p class="lead">Technical overview</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="demo-area">
+                    <h3 class="mb-4">Interactive Demo</h3>
+                    <div id="demoContent">
+                        <p class="text-center text-muted">Demo interface loading...</p>
+                        <div class="text-center mt-4">
+                            <button class="btn btn-custom" onclick="initDemo()">
+                                <i class="fas fa-play"></i> Start Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="feature-card">
+                    <h4>Key Features</h4>
+                    <ul class="list-unstyled mt-3">
+                        <li><i class="fas fa-check-circle text-success"></i> Microservices</li>
+                        <li><i class="fas fa-check-circle text-success"></i> Database schema</li>
+                        <li><i class="fas fa-check-circle text-success"></i> API endpoints</li>
+                        <li><i class="fas fa-check-circle text-success"></i> Security</li>
+                        <li><i class="fas fa-check-circle text-success"></i> Compliance</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Quick Stats</h4>
+                    <div class="mt-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Status:</span>
+                            <span class="badge bg-success">Active</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Users:</span>
+                            <strong>12,847</strong>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>API:</span>
+                            <a href="http://localhost:8000/docs" target="_blank">View Docs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function initDemo() {
+            document.getElementById('demoContent').innerHTML = `
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> This is a demonstration interface for <strong>System Architecture</strong>.
+                    <br><br>
+                    In a production environment, this would connect to the backend API at 
+                    <a href="http://localhost:8000" target="_blank">http://localhost:8000</a>
+                    <br><br>
+                    <strong>Features demonstrated:</strong>
+                    <ul class="mt-2">
+                        <li>Microservices</li>
+                        <li>Database schema</li>
+                        <li>API endpoints</li>
+                        <li>Security</li>
+                        <li>Compliance</li>
+                    </ul>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="http://localhost:8000/docs" target="_blank" class="btn btn-custom">
+                        <i class="fas fa-code"></i> View API Documentation
+                    </a>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

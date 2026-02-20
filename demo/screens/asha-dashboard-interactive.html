@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASHA Dashboard | Sakhi - Women's Health Companion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .content {
+            max-width: 1600px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .stats-row {
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-card h3 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .patient-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid #06b6d4;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .patient-card:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateX(5px);
+        }
+        .patient-card.critical {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+        .patient-card.high {
+            border-left-color: #f59e0b;
+            background: #fffbeb;
+        }
+        .patient-card.moderate {
+            border-left-color: #3b82f6;
+            background: #eff6ff;
+        }
+        .alert-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .modal-patient-details {
+            max-width: 900px;
+        }
+        .timeline-item {
+            border-left: 3px solid #06b6d4;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #06b6d4;
+            border-radius: 50%;
+            position: absolute;
+            left: -7.5px;
+            top: 5px;
+        }
+        .filter-btn {
+            margin: 5px;
+            border-radius: 20px;
+        }
+        .filter-btn.active {
+            background: #06b6d4;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-arrow-left"></i> Back to Modules
+            </a>
+            <span class="navbar-text text-white">
+                <i class="fas fa-hospital-user"></i> Sakhi ASHA Dashboard - Priya Sharma
+            </span>
+        </div>
+    </nav>
+
+    <div class="content">
+        <!-- Stats Row -->
+        <div class="row stats-row g-3">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                    <h3 id="totalPatients">38</h3>
+                    <p class="text-muted mb-0">Total Patients</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <i class="fas fa-exclamation-triangle fa-2x text-danger mb-2"></i>
+                    <h3 id="highRisk">7</h3>
+                    <p class="text-muted mb-0">High Risk Cases</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check fa-2x text-success mb-2"></i>
+                    <h3 id="todayVisits">5</h3>
+                    <p class="text-muted mb-0">Visits Today</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <i class="fas fa-bell fa-2x text-warning mb-2"></i>
+                    <h3 id="pendingAlerts">12</h3>
+                    <p class="text-muted mb-0">Pending Alerts</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="bg-white rounded-3 p-3 mb-3 shadow-sm">
+            <h5 class="mb-3">Filter Patients:</h5>
+            <button class="btn btn-outline-primary filter-btn active" onclick="filterPatients('all')">All (38)</button>
+            <button class="btn btn-outline-danger filter-btn" onclick="filterPatients('critical')">Critical (2)</button>
+            <button class="btn btn-outline-warning filter-btn" onclick="filterPatients('high')">High Risk (5)</button>
+            <button class="btn btn-outline-info filter-btn" onclick="filterPatients('moderate')">Moderate (12)</button>
+            <button class="btn btn-outline-success filter-btn" onclick="filterPatients('low')">Low Risk (19)</button>
+        </div>
+
+        <!-- Patient List -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="bg-white rounded-3 p-4 shadow-sm">
+                    <h4 class="mb-4"><i class="fas fa-list"></i> My Caseload</h4>
+                    <div id="patientList">
+                        <!-- Patients will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerts Panel -->
+            <div class="col-lg-4">
+                <div class="bg-white rounded-3 p-4 shadow-sm mb-3">
+                    <h5 class="mb-3"><i class="fas fa-bell"></i> Recent Alerts</h5>
+                    <div id="alertsList">
+                        <!-- Alerts will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3 p-4 shadow-sm">
+                    <h5 class="mb-3"><i class="fas fa-tasks"></i> Today's Tasks</h5>
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item">
+                            <i class="fas fa-home text-primary"></i> Home visit - Patient #1247
+                        </div>
+                        <div class="list-group-item">
+                            <i class="fas fa-phone text-success"></i> Follow-up call - Patient #1189
+                        </div>
+                        <div class="list-group-item">
+                            <i class="fas fa-flask text-info"></i> Lab results review - 3 patients
+                        </div>
+                        <div class="list-group-item">
+                            <i class="fas fa-clipboard text-warning"></i> Monthly report due
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patient Details Modal -->
+    <div class="modal fade" id="patientModal" tabindex="-1">
+        <div class="modal-dialog modal-patient-details modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Patient Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Patient details will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="logIntervention()">
+                        <i class="fas fa-plus"></i> Log Intervention
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Patient database
+        const patients = [
+            {
+                id: 1247,
+                name: "Patient #1247",
+                age: 26,
+                risk: "critical",
+                riskScore: 87,
+                epds: 18,
+                lastVisit: "2 days ago",
+                condition: "Postpartum - 6 weeks",
+                hemoglobin: 10.2,
+                alerts: ["High EPDS score", "Low hemoglobin"],
+                history: [
+                    { date: "2 days ago", event: "EPDS screening - Score: 18/30", type: "screening" },
+                    { date: "1 week ago", event: "Home visit - Counseling provided", type: "intervention" },
+                    { date: "2 weeks ago", event: "Lab results - Hb: 10.2 g/dL", type: "lab" }
+                ]
+            },
+            {
+                id: 1189,
+                name: "Patient #1189",
+                age: 29,
+                risk: "high",
+                riskScore: 76,
+                epds: 14,
+                lastVisit: "5 days ago",
+                condition: "Postpartum - 12 weeks",
+                hemoglobin: 9.2,
+                alerts: ["Anemia", "Moderate depression symptoms"],
+                history: [
+                    { date: "5 days ago", event: "Phone consultation - IFA prescribed", type: "intervention" },
+                    { date: "1 week ago", event: "Lab results - Hb: 9.2 g/dL", type: "lab" },
+                    { date: "2 weeks ago", event: "EPDS screening - Score: 14/30", type: "screening" }
+                ]
+            },
+            {
+                id: 1356,
+                name: "Patient #1356",
+                age: 24,
+                risk: "moderate",
+                riskScore: 54,
+                epds: 9,
+                lastVisit: "1 week ago",
+                condition: "Postpartum - 8 weeks",
+                hemoglobin: 11.8,
+                alerts: ["Follow-up due"],
+                history: [
+                    { date: "1 week ago", event: "Routine check-up - All normal", type: "visit" },
+                    { date: "3 weeks ago", event: "EPDS screening - Score: 9/30", type: "screening" }
+                ]
+            },
+            {
+                id: 1423,
+                name: "Patient #1423",
+                age: 31,
+                risk: "low",
+                riskScore: 28,
+                epds: 5,
+                lastVisit: "3 days ago",
+                condition: "Postpartum - 16 weeks",
+                hemoglobin: 12.5,
+                alerts: [],
+                history: [
+                    { date: "3 days ago", event: "Routine check-up - Healthy", type: "visit" },
+                    { date: "1 month ago", event: "EPDS screening - Score: 5/30", type: "screening" }
+                ]
+            },
+            {
+                id: 1512,
+                name: "Patient #1512",
+                age: 27,
+                risk: "critical",
+                riskScore: 92,
+                epds: 22,
+                lastVisit: "1 day ago",
+                condition: "Postpartum - 4 weeks",
+                hemoglobin: 9.8,
+                alerts: ["Severe depression symptoms", "Suicidal ideation screening positive"],
+                history: [
+                    { date: "1 day ago", event: "Emergency visit - Psychiatric referral made", type: "intervention" },
+                    { date: "2 days ago", event: "EPDS screening - Score: 22/30", type: "screening" }
+                ]
+            }
+        ];
+
+        let currentFilter = 'all';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPatients();
+            loadAlerts();
+        });
+
+        function loadPatients() {
+            const container = document.getElementById('patientList');
+            let filteredPatients = patients;
+
+            if (currentFilter !== 'all') {
+                filteredPatients = patients.filter(p => p.risk === currentFilter);
+            }
+
+            container.innerHTML = filteredPatients.map(patient => `
+                <div class="patient-card ${patient.risk}" onclick="showPatientDetails(${patient.id})">
+                    ${patient.alerts.length > 0 ? '<span class="alert-badge"><i class="fas fa-bell text-danger"></i></span>' : ''}
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="flex-grow-1">
+                            <h5 class="mb-2">
+                                ${patient.name}
+                                <span class="badge bg-${getRiskColor(patient.risk)} ms-2">${patient.risk.toUpperCase()}</span>
+                            </h5>
+                            <p class="mb-1 text-muted">
+                                <i class="fas fa-user"></i> Age: ${patient.age} | 
+                                <i class="fas fa-calendar"></i> Last Visit: ${patient.lastVisit}
+                            </p>
+                            <p class="mb-1">
+                                <strong>Condition:</strong> ${patient.condition} | 
+                                <strong>PPD Risk:</strong> ${patient.riskScore}/100 | 
+                                <strong>EPDS:</strong> ${patient.epds}/30
+                            </p>
+                            ${patient.alerts.length > 0 ? `
+                                <p class="mb-0 text-danger small">
+                                    <i class="fas fa-exclamation-circle"></i> ${patient.alerts.join(', ')}
+                                </p>
+                            ` : ''}
+                        </div>
+                        <button class="btn btn-${getRiskColor(patient.risk)} btn-sm">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadAlerts() {
+            const container = document.getElementById('alertsList');
+            const alerts = [
+                { patient: 1512, message: "Severe depression symptoms", time: "5 min ago", priority: "critical" },
+                { patient: 1247, message: "High EPDS score (18/30)", time: "2 hours ago", priority: "high" },
+                { patient: 1189, message: "Anemia detected (Hb: 9.2)", time: "1 day ago", priority: "high" },
+                { patient: 1356, message: "Follow-up overdue", time: "2 days ago", priority: "moderate" }
+            ];
+
+            container.innerHTML = alerts.map(alert => `
+                <div class="alert alert-${alert.priority === 'critical' ? 'danger' : alert.priority === 'high' ? 'warning' : 'info'} alert-dismissible fade show mb-2" role="alert">
+                    <strong>Patient #${alert.patient}</strong><br>
+                    ${alert.message}<br>
+                    <small class="text-muted">${alert.time}</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `).join('');
+        }
+
+        function filterPatients(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            loadPatients();
+        }
+
+        function showPatientDetails(patientId) {
+            const patient = patients.find(p => p.id === patientId);
+            if (!patient) return;
+
+            document.getElementById('modalTitle').textContent = `${patient.name} - Detailed View`;
+            document.getElementById('modalBody').innerHTML = `
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h6>Patient Information</h6>
+                        <p><strong>Age:</strong> ${patient.age} years</p>
+                        <p><strong>Condition:</strong> ${patient.condition}</p>
+                        <p><strong>Last Visit:</strong> ${patient.lastVisit}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Risk Assessment</h6>
+                        <p><strong>PPD Risk Score:</strong> <span class="badge bg-${getRiskColor(patient.risk)}">${patient.riskScore}/100</span></p>
+                        <p><strong>EPDS Score:</strong> ${patient.epds}/30</p>
+                        <p><strong>Hemoglobin:</strong> ${patient.hemoglobin} g/dL</p>
+                    </div>
+                </div>
+
+                ${patient.alerts.length > 0 ? `
+                    <div class="alert alert-warning">
+                        <h6><i class="fas fa-exclamation-triangle"></i> Active Alerts</h6>
+                        <ul class="mb-0">
+                            ${patient.alerts.map(alert => `<li>${alert}</li>`).join('')}
+                        </ul>
+                    </div>
+                ` : ''}
+
+                <h6 class="mt-4 mb-3">Patient History</h6>
+                <div class="timeline">
+                    ${patient.history.map(item => `
+                        <div class="timeline-item">
+                            <small class="text-muted">${item.date}</small>
+                            <p class="mb-0">${item.event}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            new bootstrap.Modal(document.getElementById('patientModal')).show();
+        }
+
+        function getRiskColor(risk) {
+            const colors = {
+                'critical': 'danger',
+                'high': 'warning',
+                'moderate': 'info',
+                'low': 'success'
+            };
+            return colors[risk] || 'secondary';
+        }
+
+        function logIntervention() {
+            alert('✅ Intervention Logged!\n\nIntervention details have been recorded in the patient\'s history.\n\nNext steps:\n• Follow-up scheduled\n• ASHA supervisor notified\n• Patient record updated');
+            bootstrap.Modal.getInstance(document.getElementById('patientModal')).hide();
+        }
+    </script>
+</body>
+</html>
