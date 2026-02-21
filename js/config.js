@@ -1,6 +1,8 @@
 // API Configuration
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:8000',
+    BASE_URL: window.location.hostname === 'localhost' 
+        ? 'http://localhost:8000' 
+        : 'https://your-vercel-backend.vercel.app',
     API_PREFIX: '/api/v1',
     TIMEOUT: 30000, // 30 seconds
     

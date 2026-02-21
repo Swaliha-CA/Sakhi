@@ -1,41 +1,8 @@
-# Core Framework
-fastapi==0.115.0
-uvicorn[standard]==0.32.0
-pydantic==2.9.2
-pydantic-settings==2.6.0
-python-multipart==0.0.12
-
-# OCR and Image Processing
-paddleocr==2.9.1
-paddlepaddle==3.3.0
-opencv-python==4.10.0.84
-Pillow==11.0.0
-numpy>=1.26.4
-
-# Database
-redis==5.2.0
-hiredis==3.0.0
-sqlalchemy==2.0.36
-alembic==1.14.0
-
-# HTTP Client
-httpx==0.27.2
-aiofiles==24.1.0
-
-# LLM Integration
-openai==1.54.3
-google-generativeai==0.8.3
-
-# Utilities
-python-dotenv==1.0.1
-python-jose[cryptography]==3.3.0
-passlib[bcrypt]==1.7.4
-
-# Testing
-pytest==8.3.3
-pytest-asyncio==0.24.0
-pytest-cov==6.0.0
-hypothesis==6.119.2
-
-# Monitoring
-sentry-sdk[fastapi]==2.18.0
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+python-multipart==0.0.6
+aiofiles==23.2.1
+httpx==0.25.2
+python-dotenv==1.0.0
