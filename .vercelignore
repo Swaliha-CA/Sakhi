@@ -1,0 +1,50 @@
+# Vercel Ignore - Exclude from deployment
+
+# Tests
+tests/
+test_*.py
+*_test.py
+pytest.ini
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Hypothesis testing data
+.hypothesis/
+
+# Development files
+.env
+.env.local
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+
+# Frontend (deployed separately on GitHub Pages)
+frontend/
+demo/
+dashboard.html
+
+# Documentation
+*.md
+!README.md
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Database files (use cloud DB in production)
+*.db
+*.sqlite
+*.sqlite3
+data/
+
+# Large dependencies (already excluded from requirements.txt)
+# PaddleOCR, OpenCV, Redis not needed for serverless
