@@ -1,7 +1,7 @@
 # 🎯 SAKHI - Interactive Features Summary
 
 **Updated:** February 21, 2026  
-**Status:** ✅ 6 FULLY INTERACTIVE DEMOS READY
+**Status:** ✅ 7 FULLY INTERACTIVE DEMOS READY
 
 ---
 
@@ -70,6 +70,18 @@
 - ✅ Quick stats dashboard
 - ✅ Sample data generation for demo
 
+### 7. **EDC Exposure Tracking** 🆕
+**File:** `demo/screens/exposure-tracking-interactive.html`
+- ✅ Product usage logging with category selection
+- ✅ 6 EDC types with EPA safe limit comparison
+- ✅ Real-time exposure level calculation
+- ✅ Color-coded risk indicators (Safe/Warning/Danger)
+- ✅ Monthly exposure trend charts
+- ✅ High exposure alerts and notifications
+- ✅ Personalized reduction tips
+- ✅ Quick stats dashboard with risk counts
+- ✅ Sample data generation for demo
+
 ---
 
 ## 🎨 Features Common to All Interactive Demos
@@ -100,9 +112,9 @@
 
 ### Coverage
 - **Total Modules:** 15
-- **Interactive Demos:** 6 (40%)
-- **Static Demos:** 9 (60%)
-- **Lines of Code:** 2,250+ (interactive demos only)
+- **Interactive Demos:** 7 (47%)
+- **Static Demos:** 8 (53%)
+- **Lines of Code:** 2,800+ (interactive demos only)
 
 ### Technologies Used
 - **Frontend:** HTML5, CSS3, JavaScript ES6
@@ -118,8 +130,9 @@
 - **Voice AI:** 6 languages + 2 screenings + mic + navigation = 10+ interactions
 - **Alternatives:** Search + 4 filters + sort + shopping list = 10+ interactions
 - **Micronutrients:** Form + 6 nutrients + chart + recommendations = 10+ interactions
+- **EDC Exposure:** Product logging + 6 EDC types + chart + alerts = 10+ interactions
 
-**Total Interactive Elements:** 50+ clickable/interactive components
+**Total Interactive Elements:** 60+ clickable/interactive components
 
 ---
 
@@ -160,6 +173,7 @@
 - **Voice AI:** `demo/screens/voice-ai-interactive.html`
 - **Alternatives:** `demo/screens/alternatives-interactive.html`
 - **Micronutrients:** `demo/screens/micronutrients-interactive.html`
+- **EDC Exposure:** `demo/screens/exposure-tracking-interactive.html`
 
 ### GitHub Repository
 - **Live Repo:** https://github.com/Swaliha-CA/Sakhi
@@ -170,7 +184,7 @@
 
 ## 🎊 Ready for Presentation!
 
-Your SAKHI project now has **6 fully interactive demos** that judges can actually use and experience. Each demo showcases different aspects of your comprehensive women's health platform:
+Your SAKHI project now has **7 fully interactive demos** that judges can actually use and experience. Each demo showcases different aspects of your comprehensive women's health platform:
 
 1. **AI-powered risk assessment** (PPD Calculator)
 2. **Healthcare worker tools** (ASHA Dashboard)  
@@ -178,6 +192,7 @@ Your SAKHI project now has **6 fully interactive demos** that judges can actuall
 4. **Voice-first accessibility** (Voice AI)
 5. **Safer alternatives discovery** (Product Alternatives)
 6. **Health monitoring** (Micronutrient Tracking)
+7. **Chemical exposure tracking** (EDC Exposure)
 
 **The judges will be impressed by the depth and functionality of your working demos!** 🚀
 
@@ -186,4 +201,4 @@ Your SAKHI project now has **6 fully interactive demos** that judges can actuall
 **Last Updated:** February 21, 2026  
 **Commit Hash:** Latest  
 **Status:** 🟢 READY FOR JUDGES  
-**Interactive Demos:** ✅ 6 WORKING
+**Interactive Demos:** ✅ 7 WORKING
