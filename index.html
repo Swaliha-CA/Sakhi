@@ -3,910 +3,515 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>She - Women's Health Ledger | Live Demo</title>
+    <title>SAKHI - Complete Women's Health Platform</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <style>
-        :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --info: #3b82f6;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
-        }
-        
-        .navbar {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .stat-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
-        }
-        
-        .stat-card h3 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        
-        .stat-card p {
-            color: #6c757d;
-            margin: 0;
-        }
-        
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: white;
-            margin-bottom: 15px;
-        }
-        
-        .bg-primary-gradient { background: linear-gradient(135deg, var(--primary), var(--secondary)); }
-        .bg-success-gradient { background: linear-gradient(135deg, #10b981, #059669); }
-        .bg-danger-gradient { background: linear-gradient(135deg, #ef4444, #dc2626); }
-        .bg-warning-gradient { background: linear-gradient(135deg, #f59e0b, #d97706); }
-        
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--primary);
-        }
-        
-        .card-custom {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-        }
-        
-        .card-custom .card-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 15px 15px 0 0 !important;
-            padding: 15px 20px;
-            font-weight: bold;
-        }
-        
-        .patient-card {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-left: 4px solid var(--primary);
-            transition: all 0.3s;
-        }
-        
-        .patient-card:hover {
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transform: translateX(5px);
-        }
-        
-        .patient-card.high-risk {
-            border-left-color: var(--danger);
-            background: #fef2f2;
-        }
-        
-        .patient-card.moderate-risk {
-            border-left-color: var(--warning);
-            background: #fffbeb;
-        }
-        
-        .badge-risk {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        
-        .btn-custom {
-            border-radius: 8px;
-            padding: 10px 20px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .btn-custom:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        
-        .tab-content {
-            padding: 25px;
-            background: white;
-            border-radius: 0 0 15px 15px;
-        }
-        
-        .nav-tabs {
-            border-bottom: 2px solid #dee2e6;
-        }
-        
-        .nav-tabs .nav-link {
-            border: none;
-            color: #6c757d;
-            font-weight: 600;
-            padding: 12px 25px;
-        }
-        
-        .nav-tabs .nav-link.active {
-            color: var(--primary);
-            border-bottom: 3px solid var(--primary);
-            background: transparent;
-        }
-        
-        .voice-interface {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        .voice-btn {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: white;
-            color: var(--primary);
-            border: none;
-            font-size: 3rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .voice-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-        
-        .voice-btn.recording {
-            animation: pulse 1.5s infinite;
-            background: var(--danger);
-            color: white;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin: 20px 0;
-        }
-        
-        .alert-item {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-left: 4px solid var(--info);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .alert-item.critical {
-            border-left-color: var(--danger);
-            background: #fef2f2;
-        }
-        
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><i class="fas fa-heartbeat"></i> She - Women's Health Ledger</a>
-            <span class="badge bg-success ms-3">Live Demo</span>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#asha">ASHA Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#ppd">PPD Prediction</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#voice">Voice AI</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#analytics">Analytics</a></li>
-                </ul>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-heartbeat"></i> <strong>SAKHI</strong>
+                <span class="tagline">सखी - Your Trusted Health Friend</span>
+            </a>
+            <div class="ms-auto d-flex align-items-center">
+                <div class="api-status me-3">
+                    <i class="fas fa-circle" id="apiStatusIcon"></i>
+                    <span id="apiStatusText">Checking...</span>
+                </div>
+                <div class="user-info">
+                    <i class="fas fa-user-circle fa-2x"></i>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="container-fluid mt-4 px-4">
-        
-        <!-- Overview Section -->
-        <section id="overview" class="mb-5">
-            <h2 class="section-title"><i class="fas fa-chart-line"></i> Platform Overview</h2>
-            <div class="row g-4 mb-4">
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <div class="stat-icon bg-primary-gradient"><i class="fas fa-users"></i></div>
-                        <h3>12,847</h3>
-                        <p>Active Users</p>
+    <!-- Main Dashboard -->
+    <div class="dashboard-container">
+        <!-- Hero Section -->
+        <div class="hero-banner">
+            <div class="container">
+                <h1 class="display-3 fw-bold mb-3">
+                    <i class="fas fa-heartbeat pulse-icon"></i> SAKHI Platform
+                </h1>
+                <p class="lead mb-4">Comprehensive AI-Powered Women's Health Ecosystem</p>
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <h2>15</h2>
+                        <p>Complete Modules</p>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <div class="stat-icon bg-success-gradient"><i class="fas fa-user-nurse"></i></div>
-                        <h3>342</h3>
-                        <p>ASHA Workers</p>
+                    <div class="stat-box">
+                        <h2>36</h2>
+                        <p>Languages</p>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <div class="stat-icon bg-danger-gradient"><i class="fas fa-exclamation-triangle"></i></div>
-                        <h3>127</h3>
-                        <p>High-Risk Cases</p>
+                    <div class="stat-box">
+                        <h2>500+</h2>
+                        <p>Safer Products</p>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <div class="stat-icon bg-warning-gradient"><i class="fas fa-microphone"></i></div>
-                        <h3>8,934</h3>
-                        <p>Voice Screenings</p>
+                    <div class="stat-box">
+                        <h2>79%</h2>
+                        <p>AI Accuracy</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- ASHA Dashboard Section -->
-        <section id="asha" class="mb-5">
-            <h2 class="section-title"><i class="fas fa-hospital-user"></i> ASHA Dashboard</h2>
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="card-custom">
-                        <div class="card-header">
-                            <i class="fas fa-list"></i> My Caseload (38 Patients)
+        <!-- Module Grid -->
+        <div class="container my-5">
+            <div class="section-header mb-4">
+                <h2><i class="fas fa-th-large"></i> All Features & Modules</h2>
+                <p class="text-muted">Click any module to open in a new window</p>
+            </div>
+
+            <div class="modules-grid">
+                <!-- Phase 1: Core Features -->
+                <div class="phase-section">
+                    <h3 class="phase-title"><span class="badge bg-primary">Phase 1</span> Core Features</h3>
+                    <div class="row g-4">
+                        <!-- OCR Scanner -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card premium" onclick="openModule('ocr')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                                    <i class="fas fa-camera fa-3x"></i>
+                                </div>
+                                <div class="module-content">
+                                    <h4>OCR Product Scanner</h4>
+                                    <p>AI-powered label scanning with multi-language OCR</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-success">LIVE API</span>
+                                        <span class="badge bg-info">6 Languages</span>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> 6 languages (En, Hi, Ta, Te, Bn, Ml)</li>
+                                        <li><i class="fas fa-check"></i> Toxicity scoring</li>
+                                        <li><i class="fas fa-check"></i> Chemical detection</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-primary btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <div class="patient-card high-risk">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5 class="mb-1">Patient #1247 <span class="badge bg-danger badge-risk">Critical Risk</span></h5>
-                                        <p class="mb-1 text-muted"><i class="fas fa-calendar"></i> Last Visit: 2 days ago</p>
-                                        <p class="mb-0"><strong>PPD Risk Score:</strong> 87/100 | <strong>EPDS:</strong> 18/30</p>
+
+                        <!-- Product Alternatives -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card premium" onclick="openModule('alternatives')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                                    <i class="fas fa-exchange-alt fa-3x"></i>
+                                </div>
+                                <div class="module-content">
+                                    <h4>Safer Alternatives</h4>
+                                    <p>Find toxin-free product alternatives with shopping list</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-success">LIVE API</span>
+                                        <span class="badge bg-warning">500+ Products</span>
                                     </div>
-                                    <button class="btn btn-danger btn-custom" onclick="viewPatient(1247)">
-                                        <i class="fas fa-eye"></i> View Details
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> Smart search</li>
+                                        <li><i class="fas fa-check"></i> Shopping list</li>
+                                        <li><i class="fas fa-check"></i> Price filtering</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-success btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
                                     </button>
                                 </div>
                             </div>
-                            
-                            <div class="patient-card high-risk">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5 class="mb-1">Patient #1189 <span class="badge bg-danger badge-risk">High Risk</span></h5>
-                                        <p class="mb-1 text-muted"><i class="fas fa-calendar"></i> Last Visit: 5 days ago</p>
-                                        <p class="mb-0"><strong>PPD Risk Score:</strong> 76/100 | <strong>Hemoglobin:</strong> 9.2 g/dL</p>
+                        </div>
+
+                        <!-- EDC Exposure Tracking -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card premium" onclick="openModule('exposure')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                                    <i class="fas fa-chart-line fa-3x"></i>
+                                </div>
+                                <div class="module-content">
+                                    <h4>EDC Exposure Tracking</h4>
+                                    <p>Monitor cumulative chemical exposure vs EPA limits</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-success">LIVE API</span>
+                                        <span class="badge bg-danger">EPA Limits</span>
                                     </div>
-                                    <button class="btn btn-warning btn-custom" onclick="viewPatient(1189)">
-                                        <i class="fas fa-eye"></i> View Details
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> 6 EDC types</li>
+                                        <li><i class="fas fa-check"></i> Trend analysis</li>
+                                        <li><i class="fas fa-check"></i> Risk alerts</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
                                     </button>
                                 </div>
                             </div>
-                            
-                            <div class="patient-card moderate-risk">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5 class="mb-1">Patient #1356 <span class="badge bg-warning badge-risk">Moderate Risk</span></h5>
-                                        <p class="mb-1 text-muted"><i class="fas fa-calendar"></i> Last Visit: 1 week ago</p>
-                                        <p class="mb-0"><strong>PPD Risk Score:</strong> 54/100 | <strong>Status:</strong> Stable</p>
-                                    </div>
-                                    <button class="btn btn-info btn-custom" onclick="viewPatient(1356)">
-                                        <i class="fas fa-eye"></i> View Details
-                                    </button>
+                        </div>
+
+                        <!-- Notifications -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card premium" onclick="openModule('notifications')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #f43f5e, #e11d48);">
+                                    <i class="fas fa-bell fa-3x"></i>
                                 </div>
-                            </div>
-                            
-                            <div class="patient-card">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5 class="mb-1">Patient #1423 <span class="badge bg-success badge-risk">Low Risk</span></h5>
-                                        <p class="mb-1 text-muted"><i class="fas fa-calendar"></i> Last Visit: 3 days ago</p>
-                                        <p class="mb-0"><strong>PPD Risk Score:</strong> 28/100 | <strong>Status:</strong> Healthy</p>
+                                <div class="module-content">
+                                    <h4>Smart Notifications</h4>
+                                    <p>Multi-channel alerts for health and product updates</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-success">LIVE API</span>
+                                        <span class="badge bg-primary">Real-time</span>
                                     </div>
-                                    <button class="btn btn-success btn-custom" onclick="viewPatient(1423)">
-                                        <i class="fas fa-eye"></i> View Details
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> Health alerts</li>
+                                        <li><i class="fas fa-check"></i> Product updates</li>
+                                        <li><i class="fas fa-check"></i> Reminders</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-lg-4">
-                    <div class="card-custom">
-                        <div class="card-header">
-                            <i class="fas fa-bell"></i> Recent Alerts
+
+                <!-- Phase 2: Advanced Features -->
+                <div class="phase-section mt-5">
+                    <h3 class="phase-title"><span class="badge bg-warning">Phase 2</span> Advanced AI Features</h3>
+                    <div class="row g-4">
+                        <!-- Voice AI -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card premium" onclick="openModule('voice')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                                    <i class="fas fa-microphone-alt fa-3x"></i>
+                                </div>
+                                <div class="module-content">
+                                    <h4>Voice AI Screening</h4>
+                                    <p>Voice-first EPDS & PHQ-9 in 36 Indic languages</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-success">LIVE API</span>
+                                        <span class="badge bg-info">36 Languages</span>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> 12 languages (incl. Malayalam)</li>
+                                        <li><i class="fas fa-check"></i> EPDS & PHQ-9 screenings</li>
+                                        <li><i class="fas fa-check"></i> Offline mode (top 5)</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-primary btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <div class="alert-item critical">
-                                <div>
-                                    <strong>Critical Alert</strong>
-                                    <p class="mb-0 small">Patient #1247 - EPDS score 18</p>
-                                    <small class="text-muted">5 min ago</small>
+
+                        <!-- PPD Prediction -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card premium" onclick="openModule('ppd')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                                    <i class="fas fa-brain fa-3x"></i>
                                 </div>
-                                <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                                <div class="module-content">
+                                    <h4>PPD Risk Prediction</h4>
+                                    <p>AI-powered postpartum depression risk assessment</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-success">LIVE API</span>
+                                        <span class="badge bg-warning">79% Accuracy</span>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> 5-factor model</li>
+                                        <li><i class="fas fa-check"></i> Real-time risk</li>
+                                        <li><i class="fas fa-check"></i> ASHA alerts</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-warning btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
+                                    </button>
+                                </div>
                             </div>
-                            
-                            <div class="alert-item">
-                                <div>
-                                    <strong>Deficiency Alert</strong>
-                                    <p class="mb-0 small">Patient #1189 - Low Hemoglobin</p>
-                                    <small class="text-muted">2 hours ago</small>
+                        </div>
+
+                        <!-- Micronutrient Tracking -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card premium" onclick="openModule('micronutrients')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                                    <i class="fas fa-flask fa-3x"></i>
                                 </div>
-                                <i class="fas fa-flask fa-2x text-warning"></i>
+                                <div class="module-content">
+                                    <h4>Micronutrient Tracking</h4>
+                                    <p>Lab result tracking with deficiency detection</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-success">LIVE API</span>
+                                        <span class="badge bg-purple">6 Nutrients</span>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> Lab logging</li>
+                                        <li><i class="fas fa-check"></i> Trend analysis</li>
+                                        <li><i class="fas fa-check"></i> Mood correlation</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-purple btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
+                                    </button>
+                                </div>
                             </div>
-                            
-                            <div class="alert-item">
-                                <div>
-                                    <strong>Follow-up Due</strong>
-                                    <p class="mb-0 small">Patient #1356 - Screening overdue</p>
-                                    <small class="text-muted">1 day ago</small>
+                        </div>
+
+                        <!-- Sutika Paricharya -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card" onclick="openModule('sutika')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #ec4899, #db2777);">
+                                    <i class="fas fa-spa fa-3x"></i>
                                 </div>
-                                <i class="fas fa-calendar-check fa-2x text-info"></i>
+                                <div class="module-content">
+                                    <h4>Sutika Paricharya</h4>
+                                    <p>45-day Ayurvedic postpartum recovery program</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-secondary">Coming Soon</span>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> 45-day regimen</li>
+                                        <li><i class="fas fa-check"></i> Regional foods</li>
+                                        <li><i class="fas fa-check"></i> Heritage recipes</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-pink btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Offline Sync -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card" onclick="openModule('offline')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">
+                                    <i class="fas fa-sync-alt fa-3x"></i>
+                                </div>
+                                <div class="module-content">
+                                    <h4>Offline-First Sync</h4>
+                                    <p>SQLite-based offline storage with ABHA integration</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-secondary">Coming Soon</span>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> Local SQLite</li>
+                                        <li><i class="fas fa-check"></i> Bidirectional sync</li>
+                                        <li><i class="fas fa-check"></i> ABHA ID</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-indigo btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3: Healthcare Integration -->
+                <div class="phase-section mt-5">
+                    <h3 class="phase-title"><span class="badge bg-info">Phase 3</span> Healthcare Integration</h3>
+                    <div class="row g-4">
+                        <!-- ASHA Dashboard -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card premium" onclick="openModule('asha')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                                    <i class="fas fa-hospital-user fa-3x"></i>
+                                </div>
+                                <div class="module-content">
+                                    <h4>ASHA Dashboard</h4>
+                                    <p>Case management for ASHA workers with alerts</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-success">LIVE API</span>
+                                        <span class="badge bg-info">30-40 Cases</span>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> Caseload mgmt</li>
+                                        <li><i class="fas fa-check"></i> Risk prioritization</li>
+                                        <li><i class="fas fa-check"></i> Intervention logs</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-info btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Climate Shield -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card" onclick="openModule('climate')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #f97316, #ea580c);">
+                                    <i class="fas fa-temperature-high fa-3x"></i>
+                                </div>
+                                <div class="module-content">
+                                    <h4>Climate-Health Shield</h4>
+                                    <p>WBGT heat stress monitoring & WASH mapping</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-secondary">Coming Soon</span>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> WBGT index</li>
+                                        <li><i class="fas fa-check"></i> Work-rest cycles</li>
+                                        <li><i class="fas fa-check"></i> WASH mapping</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-orange btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buddy System -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card" onclick="openModule('buddy')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #14b8a6, #0d9488);">
+                                    <i class="fas fa-user-friends fa-3x"></i>
+                                </div>
+                                <div class="module-content">
+                                    <h4>Buddy System</h4>
+                                    <p>Elder support with digital helpers & recipe sharing</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-secondary">Coming Soon</span>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> Profile linking</li>
+                                        <li><i class="fas fa-check"></i> Helper logging</li>
+                                        <li><i class="fas fa-check"></i> Recipe sharing</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-teal btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Population Health -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card" onclick="openModule('analytics')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #a855f7, #9333ea);">
+                                    <i class="fas fa-chart-bar fa-3x"></i>
+                                </div>
+                                <div class="module-content">
+                                    <h4>Population Analytics</h4>
+                                    <p>Anonymized data analytics for public health</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-secondary">Coming Soon</span>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> Regional mapping</li>
+                                        <li><i class="fas fa-check"></i> EDC-PCOS correlation</li>
+                                        <li><i class="fas fa-check"></i> K-anonymity</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-purple btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Predictive Analytics -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card" onclick="openModule('predictive')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #64748b, #475569);">
+                                    <i class="fas fa-chart-pie fa-3x"></i>
+                                </div>
+                                <div class="module-content">
+                                    <h4>Predictive Analytics</h4>
+                                    <p>ML-powered health outcome predictions</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-secondary">Coming Soon</span>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> Risk modeling</li>
+                                        <li><i class="fas fa-check"></i> Trend forecasting</li>
+                                        <li><i class="fas fa-check"></i> Early warnings</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-secondary btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- System Architecture -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="module-card" onclick="openModule('architecture')">
+                                <div class="module-icon" style="background: linear-gradient(135deg, #475569, #334155);">
+                                    <i class="fas fa-project-diagram fa-3x"></i>
+                                </div>
+                                <div class="module-content">
+                                    <h4>System Architecture</h4>
+                                    <p>Technical architecture & integration overview</p>
+                                    <div class="module-tags">
+                                        <span class="badge bg-dark">Documentation</span>
+                                    </div>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> Microservices</li>
+                                        <li><i class="fas fa-check"></i> API endpoints</li>
+                                        <li><i class="fas fa-check"></i> Security</li>
+                                    </ul>
+                                </div>
+                                <div class="module-footer">
+                                    <button class="btn btn-dark btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Open Module
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- PPD Prediction Section -->
-        <section id="ppd" class="mb-5">
-            <h2 class="section-title"><i class="fas fa-brain"></i> PPD Risk Prediction</h2>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card-custom">
-                        <div class="card-header">
-                            <i class="fas fa-calculator"></i> Risk Assessment Tool
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label class="form-label"><strong>EPDS Score (0-30):</strong></label>
-                                <input type="range" class="form-range" min="0" max="30" value="15" id="epdsScore" oninput="calculateRisk()">
-                                <span id="epdsValue" class="badge bg-primary">15</span>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Hormonal Risk (0-100):</strong></label>
-                                <input type="range" class="form-range" min="0" max="100" value="60" id="hormonalScore" oninput="calculateRisk()">
-                                <span id="hormonalValue" class="badge bg-primary">60</span>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Environmental Exposure (0-100):</strong></label>
-                                <input type="range" class="form-range" min="0" max="100" value="45" id="envScore" oninput="calculateRisk()">
-                                <span id="envValue" class="badge bg-primary">45</span>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Micronutrient Status (0-100):</strong></label>
-                                <input type="range" class="form-range" min="0" max="100" value="70" id="microScore" oninput="calculateRisk()">
-                                <span id="microValue" class="badge bg-primary">70</span>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Social Support (0-100):</strong></label>
-                                <input type="range" class="form-range" min="0" max="100" value="55" id="socialScore" oninput="calculateRisk()">
-                                <span id="socialValue" class="badge bg-primary">55</span>
-                            </div>
-                            
-                            <button class="btn btn-primary btn-custom w-100" onclick="calculateRisk()">
-                                <i class="fas fa-calculator"></i> Calculate Risk Score
-                            </button>
-                        </div>
+        <!-- Quick Access Footer -->
+        <div class="quick-access-bar">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-rocket"></i> Quick Access</h5>
+                        <p class="mb-0">Jump to frequently used features</p>
                     </div>
-                </div>
-                
-                <div class="col-lg-6">
-                    <div class="card-custom">
-                        <div class="card-header">
-                            <i class="fas fa-chart-pie"></i> Risk Analysis Result
-                        </div>
-                        <div class="card-body text-center">
-                            <div class="mb-4">
-                                <h1 id="riskScore" style="font-size: 4rem; font-weight: bold; color: var(--warning);">67</h1>
-                                <h4 id="riskLevel" class="text-warning">Moderate Risk</h4>
-                            </div>
-                            
-                            <div class="chart-container">
-                                <canvas id="riskChart"></canvas>
-                            </div>
-                            
-                            <div class="mt-4">
-                                <h5>Recommendations:</h5>
-                                <ul class="list-unstyled text-start" id="recommendations">
-                                    <li><i class="fas fa-check-circle text-success"></i> Schedule follow-up in 1 week</li>
-                                    <li><i class="fas fa-check-circle text-success"></i> Monitor EPDS score weekly</li>
-                                    <li><i class="fas fa-check-circle text-success"></i> Provide counseling support</li>
-                                    <li><i class="fas fa-check-circle text-success"></i> Check micronutrient levels</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Voice AI Section -->
-        <section id="voice" class="mb-5">
-            <h2 class="section-title"><i class="fas fa-microphone-alt"></i> Voice AI Interface</h2>
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <div class="voice-interface">
-                        <h3 class="mb-4">Voice-Guided Health Screening</h3>
-                        <p class="mb-4">Click the microphone to start voice-guided EPDS or PHQ-9 screening in your preferred language</p>
-                        
-                        <button class="voice-btn mb-4" id="voiceBtn" onclick="toggleVoice()">
-                            <i class="fas fa-microphone"></i>
+                    <div class="col-md-6 text-end">
+                        <button class="btn btn-light me-2" onclick="window.open('http://localhost:8000/docs', '_blank')">
+                            <i class="fas fa-code"></i> API Docs
                         </button>
-                        
-                        <div id="voiceStatus" class="mb-3">
-                            <h5>Status: <span id="statusText">Ready</span></h5>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <select class="form-select w-50 mx-auto" id="languageSelect">
-                                <option value="en">English</option>
-                                <option value="hi">हिंदी (Hindi)</option>
-                                <option value="ta">தமிழ் (Tamil)</option>
-                                <option value="te">తెలుగు (Telugu)</option>
-                                <option value="bn">বাংলা (Bengali)</option>
-                                <option value="mr">मराठी (Marathi)</option>
-                            </select>
-                        </div>
-                        
-                        <div id="transcription" class="mt-4 p-3 bg-white text-dark rounded" style="min-height: 100px; display: none;">
-                            <strong>Transcription:</strong>
-                            <p id="transcriptText" class="mt-2"></p>
-                        </div>
-                        
-                        <div id="screeningProgress" class="mt-4" style="display: none;">
-                            <div class="progress" style="height: 30px;">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" 
-                                     style="width: 0%" id="progressBar">Question 0/10</div>
-                            </div>
-                        </div>
+                        <button class="btn btn-light me-2" onclick="window.open('http://localhost:8000/health', '_blank')">
+                            <i class="fas fa-heartbeat"></i> Health Check
+                        </button>
+                        <button class="btn btn-light" onclick="openModule('ocr')">
+                            <i class="fas fa-camera"></i> Scan Product
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Analytics Section -->
-        <section id="analytics" class="mb-5">
-            <h2 class="section-title"><i class="fas fa-chart-bar"></i> Population Health Analytics</h2>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card-custom">
-                        <div class="card-header">
-                            <i class="fas fa-map-marked-alt"></i> Regional PPD Prevalence
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-container">
-                                <canvas id="regionalChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6">
-                    <div class="card-custom">
-                        <div class="card-header">
-                            <i class="fas fa-flask"></i> Micronutrient Deficiency Trends
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-container">
-                                <canvas id="deficiencyChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row mt-4">
-                <div class="col-lg-12">
-                    <div class="card-custom">
-                        <div class="card-header">
-                            <i class="fas fa-calendar-alt"></i> Monthly Screening Trends
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-container" style="height: 400px;">
-                                <canvas id="trendsChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </div>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Initialize Charts
-        let riskChart, regionalChart, deficiencyChart, trendsChart;
-        
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeCharts();
-            calculateRisk();
-        });
-        
-        // PPD Risk Calculation
-        function calculateRisk() {
-            const epds = parseInt(document.getElementById('epdsScore').value);
-            const hormonal = parseInt(document.getElementById('hormonalScore').value);
-            const env = parseInt(document.getElementById('envScore').value);
-            const micro = parseInt(document.getElementById('microScore').value);
-            const social = parseInt(document.getElementById('socialScore').value);
-            
-            // Update display values
-            document.getElementById('epdsValue').textContent = epds;
-            document.getElementById('hormonalValue').textContent = hormonal;
-            document.getElementById('envValue').textContent = env;
-            document.getElementById('microValue').textContent = micro;
-            document.getElementById('socialValue').textContent = social;
-            
-            // Calculate weighted risk score
-            const riskScore = Math.round(
-                (epds / 30 * 100) * 0.30 +
-                hormonal * 0.25 +
-                env * 0.20 +
-                micro * 0.15 +
-                social * 0.10
-            );
-            
-            // Update risk display
-            document.getElementById('riskScore').textContent = riskScore;
-            
-            let riskLevel, riskColor, recommendations;
-            if (riskScore >= 80) {
-                riskLevel = 'Critical Risk';
-                riskColor = 'var(--danger)';
-                recommendations = [
-                    'Immediate psychiatric referral required',
-                    'Daily monitoring by ASHA worker',
-                    'Emergency support system activation',
-                    'Family counseling session'
-                ];
-            } else if (riskScore >= 60) {
-                riskLevel = 'High Risk';
-                riskColor = 'var(--warning)';
-                recommendations = [
-                    'Schedule follow-up within 3 days',
-                    'Weekly EPDS monitoring',
-                    'Counseling support recommended',
-                    'Check micronutrient levels'
-                ];
-            } else if (riskScore >= 40) {
-                riskLevel = 'Moderate Risk';
-                riskColor = 'var(--info)';
-                recommendations = [
-                    'Schedule follow-up in 1 week',
-                    'Bi-weekly monitoring',
-                    'Provide educational materials',
-                    'Encourage social support'
-                ];
-            } else {
-                riskLevel = 'Low Risk';
-                riskColor = 'var(--success)';
-                recommendations = [
-                    'Continue routine monitoring',
-                    'Monthly check-ins',
-                    'Maintain healthy lifestyle',
-                    'Regular nutritional assessment'
-                ];
-            }
-            
-            document.getElementById('riskLevel').textContent = riskLevel;
-            document.getElementById('riskLevel').style.color = riskColor;
-            document.getElementById('riskScore').style.color = riskColor;
-            
-            // Update recommendations
-            const recList = document.getElementById('recommendations');
-            recList.innerHTML = recommendations.map(rec => 
-                `<li><i class="fas fa-check-circle" style="color: ${riskColor}"></i> ${rec}</li>`
-            ).join('');
-            
-            // Update risk chart
-            updateRiskChart(epds/30*100, hormonal, env, micro, social);
-        }
-        
-        // Voice Interface
-        let isRecording = false;
-        let currentQuestion = 0;
-        const totalQuestions = 10;
-        
-        function toggleVoice() {
-            const btn = document.getElementById('voiceBtn');
-            const statusText = document.getElementById('statusText');
-            const transcription = document.getElementById('transcription');
-            const progress = document.getElementById('screeningProgress');
-            
-            isRecording = !isRecording;
-            
-            if (isRecording) {
-                btn.classList.add('recording');
-                btn.innerHTML = '<i class="fas fa-stop"></i>';
-                statusText.textContent = 'Recording...';
-                transcription.style.display = 'block';
-                progress.style.display = 'block';
-                
-                // Simulate screening questions
-                simulateScreening();
-            } else {
-                btn.classList.remove('recording');
-                btn.innerHTML = '<i class="fas fa-microphone"></i>';
-                statusText.textContent = 'Ready';
-                currentQuestion = 0;
-                updateProgress();
-            }
-        }
-        
-        function simulateScreening() {
-            if (!isRecording) return;
-            
-            const questions = [
-                "I have been able to laugh and see the funny side of things",
-                "I have looked forward with enjoyment to things",
-                "I have blamed myself unnecessarily when things went wrong",
-                "I have been anxious or worried for no good reason",
-                "I have felt scared or panicky for no very good reason",
-                "Things have been getting on top of me",
-                "I have been so unhappy that I have had difficulty sleeping",
-                "I have felt sad or miserable",
-                "I have been so unhappy that I have been crying",
-                "The thought of harming myself has occurred to me"
-            ];
-            
-            const responses = [
-                "As much as I always could",
-                "Not quite so much now",
-                "Definitely not so much now",
-                "Not at all"
-            ];
-            
-            if (currentQuestion < totalQuestions) {
-                setTimeout(() => {
-                    const lang = document.getElementById('languageSelect').value;
-                    document.getElementById('transcriptText').innerHTML = 
-                        `<strong>Question ${currentQuestion + 1}:</strong> ${questions[currentQuestion]}<br>
-                         <strong>Your Response:</strong> ${responses[Math.floor(Math.random() * 4)]}`;
-                    
-                    currentQuestion++;
-                    updateProgress();
-                    
-                    if (isRecording) {
-                        simulateScreening();
-                    }
-                }, 3000);
-            } else {
-                toggleVoice();
-                alert('Screening Complete! EPDS Score: 12/30 (Moderate symptoms)');
-            }
-        }
-        
-        function updateProgress() {
-            const progressBar = document.getElementById('progressBar');
-            const percentage = (currentQuestion / totalQuestions) * 100;
-            progressBar.style.width = percentage + '%';
-            progressBar.textContent = `Question ${currentQuestion}/${totalQuestions}`;
-        }
-        
-        // View Patient Details
-        function viewPatient(patientId) {
-            alert(`Opening detailed view for Patient #${patientId}\n\nThis would show:\n- Complete health history\n- All screening results\n- Intervention logs\n- Risk trends\n- Upcoming appointments`);
-        }
-
-        
-        // Initialize Charts
-        function initializeCharts() {
-            // Risk Breakdown Chart
-            const riskCtx = document.getElementById('riskChart').getContext('2d');
-            riskChart = new Chart(riskCtx, {
-                type: 'radar',
-                data: {
-                    labels: ['EPDS', 'Hormonal', 'Environmental', 'Micronutrients', 'Social'],
-                    datasets: [{
-                        label: 'Risk Factors',
-                        data: [50, 60, 45, 70, 55],
-                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
-                        borderColor: 'rgba(102, 126, 234, 1)',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            beginAtZero: true,
-                            max: 100
-                        }
-                    }
-                }
-            });
-            
-            // Regional PPD Prevalence Chart
-            const regionalCtx = document.getElementById('regionalChart').getContext('2d');
-            regionalChart = new Chart(regionalCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['North', 'South', 'East', 'West', 'Central'],
-                    datasets: [{
-                        label: 'PPD Cases per 1000',
-                        data: [145, 132, 167, 128, 153],
-                        backgroundColor: [
-                            'rgba(102, 126, 234, 0.8)',
-                            'rgba(118, 75, 162, 0.8)',
-                            'rgba(239, 68, 68, 0.8)',
-                            'rgba(16, 185, 129, 0.8)',
-                            'rgba(245, 158, 11, 0.8)'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
-                }
-            });
-            
-            // Micronutrient Deficiency Chart
-            const deficiencyCtx = document.getElementById('deficiencyChart').getContext('2d');
-            deficiencyChart = new Chart(deficiencyCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Anemia', 'B12 Deficiency', 'Folate Deficiency', 'Vitamin D', 'Healthy'],
-                    datasets: [{
-                        data: [35, 22, 18, 15, 10],
-                        backgroundColor: [
-                            'rgba(239, 68, 68, 0.8)',
-                            'rgba(245, 158, 11, 0.8)',
-                            'rgba(59, 130, 246, 0.8)',
-                            'rgba(168, 85, 247, 0.8)',
-                            'rgba(16, 185, 129, 0.8)'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-            
-            // Monthly Trends Chart
-            const trendsCtx = document.getElementById('trendsChart').getContext('2d');
-            trendsChart = new Chart(trendsCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [
-                        {
-                            label: 'Total Screenings',
-                            data: [650, 720, 680, 790, 850, 920, 880, 950, 1020, 980, 1050, 1100],
-                            borderColor: 'rgba(102, 126, 234, 1)',
-                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                            tension: 0.4
-                        },
-                        {
-                            label: 'High-Risk Cases',
-                            data: [45, 52, 48, 58, 62, 68, 65, 72, 78, 75, 82, 87],
-                            borderColor: 'rgba(239, 68, 68, 1)',
-                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Interventions',
-                            data: [120, 135, 128, 145, 158, 172, 165, 180, 195, 188, 205, 218],
-                            borderColor: 'rgba(16, 185, 129, 1)',
-                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                            tension: 0.4
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
-        
-        function updateRiskChart(epds, hormonal, env, micro, social) {
-            if (riskChart) {
-                riskChart.data.datasets[0].data = [epds, hormonal, env, micro, social];
-                riskChart.update();
-            }
-        }
-        
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Auto-refresh stats (simulate real-time updates)
-        setInterval(() => {
-            // Simulate real-time data updates
-            const stats = document.querySelectorAll('.stat-card h3');
-            stats.forEach(stat => {
-                const currentValue = parseInt(stat.textContent.replace(/,/g, ''));
-                const change = Math.floor(Math.random() * 10) - 5;
-                const newValue = Math.max(0, currentValue + change);
-                stat.textContent = newValue.toLocaleString();
-            });
-        }, 10000);
-    </script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>
