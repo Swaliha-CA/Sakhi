@@ -13,7 +13,7 @@
 - Member 2: Swaliha C A - Adi Shankara Institute of Engineering Technology, Kalady
 
 ### Hosted Project Link
-**Live Demo:** [Open Demo](demo/index.html)  
+**Live Demo:** https://swaliha-ca.github.io/Sakhi/ 
 **API Documentation:** http://localhost:8000/docs  
 **Interactive Demos:** 
 - [PPD Risk Calculator](demo/screens/ppd-prediction-interactive.html)
