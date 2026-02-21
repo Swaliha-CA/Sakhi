@@ -1,25 +1,14 @@
 """
 Vercel serverless function entry point for SAKHI backend API
+Simplified version without lifespan events for serverless compatibility
 """
-import sys
-import os
-from pathlib import Path
-
-# Add parent directory to path
-root_path = Path(__file__).parent.parent
-sys.path.insert(0, str(root_path))
-
-# Set required environment variables for serverless
-os.environ.setdefault('SECRET_KEY', 'vercel-deployment-secret-key-change-in-production')
-os.environ.setdefault('ENVIRONMENT', 'production')
-os.environ.setdefault('DEBUG', 'False')
-
-# Create a simple FastAPI app
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
+# Create a simple FastAPI app without lifespan
 app = FastAPI(
-    title="SAKHI API",
+    title="SAKHI - Women's Health Platform",
     version="1.0.0",
     description="Women's Health Ledger API"
 )
@@ -35,32 +24,35 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
+    """Root endpoint"""
     return {
-        "service": "SAKHI API",
+        "service": "SAKHI - Women's Health Platform",
         "version": "1.0.0",
         "status": "running",
-        "platform": "Vercel Serverless",
-        "features": ["OCR Scanner", "Voice AI", "Alternatives", "Notifications", "Exposure Tracking"]
+        "features": [
+            "OCR Scanner",
+            "Voice AI", 
+            "PPD Prediction",
+            "Safer Alternatives",
+            "Exposure Tracking",
+            "Notifications"
+        ],
+        "deployment": "Vercel Serverless"
     }
 
 @app.get("/health")
 async def health():
+    """Health check endpoint"""
     return {
         "status": "healthy",
-        "service": "SAKHI API",
-        "version": "1.0.0"
+        "service": "SAKHI",
+        "version": "1.0.0",
+        "platform": "Vercel"
     }
 
-@app.get("/api/v1/health")
-async def api_health():
-    return {
-        "status": "healthy",
-        "api_version": "v1"
-    }
-
-# OCR endpoints
 @app.get("/api/v1/ocr/health")
 async def ocr_health():
+    """OCR health check"""
     return {
         "status": "healthy",
         "service": "OCR Scanner",
@@ -69,100 +61,88 @@ async def ocr_health():
 
 @app.post("/api/v1/ocr/extract-text")
 async def ocr_extract():
+    """OCR text extraction (mock for demo)"""
     return {
         "success": True,
-        "text": "Sample extracted text from product label",
+        "text": "Sample product label text",
         "language": "en",
-        "confidence": 0.95,
         "toxicity_score": 45,
         "chemicals_detected": ["Parabens", "Phthalates"],
-        "message": "OCR service running on Vercel"
+        "message": "This is a demo response. Full OCR requires additional setup."
     }
 
-# Alternatives endpoints
 @app.get("/api/v1/alternatives/find")
-async def find_alternatives(product_name: str = "shampoo"):
+async def find_alternatives():
+    """Find safer product alternatives"""
     return {
         "success": True,
-        "query": product_name,
         "alternatives": [
             {
                 "id": 1,
-                "name": "Organic Herbal Shampoo",
-                "brand": "Nature's Best",
+                "name": "Organic Shampoo",
+                "brand": "Natural Care",
                 "toxicity_score": 15,
                 "price": 299,
                 "available": True
             },
             {
                 "id": 2,
-                "name": "Chemical-Free Hair Cleanser",
-                "brand": "Pure Care",
+                "name": "Herbal Soap",
+                "brand": "Ayur Plus",
                 "toxicity_score": 10,
-                "price": 349,
+                "price": 150,
                 "available": True
             }
-        ]
+        ],
+        "count": 2
     }
 
-# Voice endpoints
 @app.get("/api/v1/voice/languages")
 async def voice_languages():
+    """Get supported voice languages"""
     return {
-        "success": True,
         "languages": [
             {"code": "en", "name": "English"},
-            {"code": "hi", "name": "हिंदी"},
-            {"code": "ta", "name": "தமிழ்"},
-            {"code": "te", "name": "తెలుగు"},
-            {"code": "bn", "name": "বাংলা"},
-            {"code": "ml", "name": "മലയാളം"},
-            {"code": "mr", "name": "मराठी"},
-            {"code": "gu", "name": "ગુજરાતી"},
-            {"code": "kn", "name": "ಕನ್ನಡ"},
-            {"code": "or", "name": "ଓଡ଼ିଆ"},
-            {"code": "pa", "name": "ਪੰਜਾਬੀ"},
-            {"code": "as", "name": "অসমীয়া"}
-        ]
+            {"code": "hi", "name": "Hindi"},
+            {"code": "ta", "name": "Tamil"},
+            {"code": "te", "name": "Telugu"},
+            {"code": "bn", "name": "Bengali"},
+            {"code": "ml", "name": "Malayalam"},
+            {"code": "mr", "name": "Marathi"},
+            {"code": "gu", "name": "Gujarati"},
+            {"code": "kn", "name": "Kannada"},
+            {"code": "pa", "name": "Punjabi"},
+            {"code": "or", "name": "Odia"},
+            {"code": "as", "name": "Assamese"}
+        ],
+        "total": 12
     }
 
-# Notifications endpoints
 @app.get("/api/v1/notifications")
-async def get_notifications(user_id: int = 1):
+async def get_notifications():
+    """Get user notifications"""
     return {
-        "success": True,
         "notifications": [
             {
                 "id": 1,
                 "type": "health_alert",
-                "title": "High Toxicity Product Detected",
-                "message": "The product you scanned contains harmful chemicals",
+                "title": "High Risk Product Detected",
+                "message": "The scanned product contains harmful chemicals",
                 "timestamp": "2026-02-21T10:30:00Z",
                 "read": False
             },
             {
                 "id": 2,
-                "type": "product_update",
-                "title": "New Safer Alternative Available",
-                "message": "A safer alternative for your recent scan is now available",
+                "type": "alternative_available",
+                "title": "Safer Alternative Found",
+                "message": "We found 5 safer alternatives for your product",
                 "timestamp": "2026-02-21T09:15:00Z",
                 "read": False
             }
-        ]
+        ],
+        "count": 2,
+        "unread": 2
     }
 
-# Exposure tracking endpoints
-@app.get("/api/v1/exposure/summary")
-async def exposure_summary(user_id: int = 1):
-    return {
-        "success": True,
-        "user_id": user_id,
-        "total_exposure": 245,
-        "epa_limit": 500,
-        "risk_level": "moderate",
-        "chemicals": {
-            "parabens": 85,
-            "phthalates": 120,
-            "formaldehyde": 40
-        }
-    }
+# Export for Vercel
+handler = app
