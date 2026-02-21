@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.core.logging import logger
 from app.api.v1.endpoints import voice, asha
+from app.api.v1.endpoints import ocr_simple
 from app.services.voice_service import bhashini_service
 from app.db.sqlite_manager import sqlite_manager
 
@@ -55,6 +56,7 @@ app.add_middleware(
 )
 
 # Include routers
+app.include_router(ocr_simple.router, prefix=settings.API_PREFIX, tags=["OCR"])
 app.include_router(voice.router, prefix=f"{settings.API_PREFIX}/voice", tags=["Voice AI"])
 app.include_router(asha.router, prefix=settings.API_PREFIX, tags=["ASHA Dashboard"])
 
@@ -66,7 +68,7 @@ async def root():
         "service": settings.APP_NAME,
         "version": settings.APP_VERSION,
         "status": "running",
-        "features": ["Voice AI", "PPD Prediction", "Offline Sync"]
+        "features": ["OCR Scanner", "Voice AI", "PPD Prediction", "Offline Sync"]
     }
 
 
