@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice AI Health Screening - Sakhi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .module-header {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .voice-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .btn-back {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .btn-back:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+        .voice-interface {
+            text-align: center;
+            padding: 40px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        .mic-button {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+        .mic-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+        }
+        .mic-button.recording {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .language-selector {
+            margin: 20px 0;
+        }
+        .language-btn {
+            margin: 5px;
+            padding: 8px 16px;
+            border: 2px solid #3b82f6;
+            background: white;
+            color: #3b82f6;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .language-btn.active {
+            background: #3b82f6;
+            color: white;
+        }
+        .screening-progress {
+            display: none;
+            margin-top: 30px;
+        }
+        .question-card {
+            background: #e0f2fe;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+        .response-area {
+            background: #f0f9ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+        .score-display {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        .score-low { background: linear-gradient(135deg, #10b981, #059669); }
+        .score-moderate { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .score-high { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .waveform {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .wave-bar {
+            width: 4px;
+            height: 20px;
+            background: #3b82f6;
+            margin: 0 2px;
+            border-radius: 2px;
+            animation: wave 1s infinite ease-in-out;
+        }
+        .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+        @keyframes wave {
+            0%, 40%, 100% { transform: scaleY(0.4); }
+            20% { transform: scaleY(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Hub
+        </a>
+        
+        <div class="module-header">
+            <div class="mb-4">
+                <i class="fas fa-microphone-alt fa-4x text-primary"></i>
+            </div>
+            <h1>Voice AI Health Screening <span class="badge bg-success">INTERACTIVE</span></h1>
+            <p class="lead">Voice-first EPDS and PHQ-9 screenings in 36+ Indic languages</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="voice-card">
+                    <h3><i class="fas fa-language text-primary"></i> Select Language</h3>
+                    <div class="language-selector">
+                        <button class="language-btn active" data-lang="en" onclick="selectLanguage('en')">English</button>
+                        <button class="language-btn" data-lang="hi" onclick="selectLanguage('hi')">हिंदी</button>
+                        <button class="language-btn" data-lang="ta" onclick="selectLanguage('ta')">தமிழ்</button>
+                        <button class="language-btn" data-lang="te" onclick="selectLanguage('te')">తెలుగు</button>
+                        <button class="language-btn" data-lang="bn" onclick="selectLanguage('bn')">বাংলা</button>
+                        <button class="language-btn" data-lang="ml" onclick="selectLanguage('ml')">മലയാളം</button>
+                    </div>
+                </div>
+
+                <div class="voice-card">
+                    <h3><i class="fas fa-clipboard-list text-success"></i> Choose Screening Type</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-heart fa-3x text-danger mb-3"></i>
+                                    <h5>EPDS Screening</h5>
+                                    <p class="text-muted">Edinburgh Postnatal Depression Scale</p>
+                                    <button class="btn btn-primary" onclick="startScreening('epds')">
+                                        <i class="fas fa-play"></i> Start EPDS
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-brain fa-3x text-info mb-3"></i>
+                                    <h5>PHQ-9 Screening</h5>
+                                    <p class="text-muted">Patient Health Questionnaire</p>
+                                    <button class="btn btn-primary" onclick="startScreening('phq9')">
+                                        <i class="fas fa-play"></i> Start PHQ-9
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="voice-interface" id="voiceInterface" style="display: none;">
+                    <h4 id="currentQuestion">Ready to begin screening...</h4>
+                    <p class="text-muted" id="questionHelper">Click the microphone to start</p>
+                    
+                    <button class="mic-button" id="micButton" onclick="toggleRecording()">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    
+                    <div class="waveform" id="waveform">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                    
+                    <div class="response-area" id="responseArea">
+                        Your response will appear here...
+                    </div>
+                    
+                    <div class="mt-3">
+                        <button class="btn btn-outline-primary" onclick="skipQuestion()" id="skipBtn" style="display: none;">
+                            <i class="fas fa-forward"></i> Skip Question
+                        </button>
+                        <button class="btn btn-success" onclick="nextQuestion()" id="nextBtn" style="display: none;">
+                            <i class="fas fa-arrow-right"></i> Next Question
+                        </button>
+                    </div>
+                </div>
+
+                <div class="screening-progress" id="screeningProgress">
+                    <h5><i class="fas fa-tasks text-info"></i> Progress</h5>
+                    <div class="progress mb-3">
+                        <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <p class="text-muted">Question <span id="currentQuestionNum">0</span> of <span id="totalQuestions">10</span></p>
+                </div>
+
+                <div class="score-display" id="scoreDisplay">
+                    <h4><i class="fas fa-chart-bar text-success"></i> Screening Results</h4>
+                    <div class="score-circle" id="scoreCircle">--</div>
+                    <h5 id="scoreLabel">Assessment Complete</h5>
+                    <div class="alert" id="scoreAlert">
+                        <p id="scoreInterpretation">--</p>
+                        <p id="scoreRecommendations">--</p>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-warning" onclick="alertASHA()">
+                            <i class="fas fa-bell"></i> Alert ASHA Worker
+                        </button>
+                        <button class="btn btn-info" onclick="saveResults()">
+                            <i class="fas fa-save"></i> Save Results
+                        </button>
+                        <button class="btn btn-success" onclick="startNew()">
+                            <i class="fas fa-redo"></i> New Screening
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="voice-card">
+                    <h4><i class="fas fa-info-circle text-info"></i> How It Works</h4>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">1</div>
+                        <div>
+                            <strong>Choose Language</strong><br>
+                            <small class="text-muted">36+ Indic languages supported</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">2</div>
+                        <div>
+                            <strong>Voice Questions</strong><br>
+                            <small class="text-muted">AI asks questions in your language</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">3</div>
+                        <div>
+                            <strong>Voice Response</strong><br>
+                            <small class="text-muted">Speak your answers naturally</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">4</div>
+                        <div>
+                            <strong>Instant Results</strong><br>
+                            <small class="text-muted">AI calculates scores immediately</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="voice-card">
+                    <h4><i class="fas fa-globe text-success"></i> Language Support</h4>
+                    <p class="text-muted mb-3">Powered by Bhashini API</p>
+                    <div class="row">
+                        <div class="col-6">
+                            <small class="badge bg-light text-dark mb-1">English</small><br>
+                            <small class="badge bg-light text-dark mb-1">हिंदी</small><br>
+                            <small class="badge bg-light text-dark mb-1">தமிழ்</small><br>
+                            <small class="badge bg-light text-dark mb-1">తెలుగు</small><br>
+                            <small class="badge bg-light text-dark mb-1">বাংলা</small><br>
+                            <small class="badge bg-light text-dark mb-1">മലയാളം</small>
+                        </div>
+                        <div class="col-6">
+                            <small class="badge bg-light text-dark mb-1">ગુજરાતી</small><br>
+                            <small class="badge bg-light text-dark mb-1">ಕನ್ನಡ</small><br>
+                            <small class="badge bg-light text-dark mb-1">मराठी</small><br>
+                            <small class="badge bg-light text-dark mb-1">ଓଡ଼ିଆ</small><br>
+                            <small class="badge bg-light text-dark mb-1">ਪੰਜਾਬੀ</small><br>
+                            <small class="badge bg-light text-dark mb-1">+25 more</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="voice-card">
+                    <h4><i class="fas fa-chart-line text-warning"></i> Screening Types</h4>
+                    <div class="mb-3">
+                        <strong>EPDS (Edinburgh Postnatal Depression Scale)</strong>
+                        <p class="text-muted small">10 questions for postpartum depression screening</p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>PHQ-9 (Patient Health Questionnaire)</strong>
+                        <p class="text-muted small">9 questions for general depression screening</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentLanguage = 'en';
+        let currentScreeningType = '';
+        let currentQuestionIndex = 0;
+        let isRecording = false;
+        let responses = [];
+        let totalQuestions = 10;
+
+        const questions = {
+            epds: [
+                "I have been able to laugh and see the funny side of things",
+                "I have looked forward with enjoyment to things",
+                "I have blamed myself unnecessarily when things went wrong",
+                "I have been anxious or worried for no good reason",
+                "I have felt scared or panicky for no very good reason",
+                "Things have been getting on top of me",
+                "I have been so unhappy that I have had difficulty sleeping",
+                "I have felt sad or miserable",
+                "I have been so unhappy that I have been crying",
+                "The thought of harming myself has occurred to me"
+            ],
+            phq9: [
+                "Little interest or pleasure in doing things",
+                "Feeling down, depressed, or hopeless",
+                "Trouble falling or staying asleep, or sleeping too much",
+                "Feeling tired or having little energy",
+                "Poor appetite or overeating",
+                "Feeling bad about yourself or that you are a failure",
+                "Trouble concentrating on things",
+                "Moving or speaking slowly, or being fidgety",
+                "Thoughts that you would be better off dead"
+            ]
+        };
+
+        const sampleResponses = [
+            "As much as I always could",
+            "Less than I used to",
+            "Definitely less than I used to",
+            "Not at all",
+            "Yes, most of the time",
+            "Yes, sometimes",
+            "No, not much",
+            "No, not at all"
+        ];
+
+        function selectLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+        }
+
+        function startScreening(type) {
+            currentScreeningType = type;
+            currentQuestionIndex = 0;
+            responses = [];
+            totalQuestions = questions[type].length;
+            
+            document.getElementById('voiceInterface').style.display = 'block';
+            document.getElementById('screeningProgress').style.display = 'block';
+            document.getElementById('scoreDisplay').style.display = 'none';
+            
+            document.getElementById('totalQuestions').textContent = totalQuestions;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const questionText = questions[currentScreeningType][currentQuestionIndex];
+            document.getElementById('currentQuestion').textContent = `Question ${currentQuestionIndex + 1}: ${questionText}`;
+            document.getElementById('questionHelper').textContent = 'Click the microphone and speak your answer';
+            document.getElementById('currentQuestionNum').textContent = currentQuestionIndex + 1;
+            
+            const progress = ((currentQuestionIndex) / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            document.getElementById('responseArea').textContent = 'Your response will appear here...';
+            document.getElementById('skipBtn').style.display = 'inline-block';
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        function toggleRecording() {
+            const micButton = document.getElementById('micButton');
+            const waveform = document.getElementById('waveform');
+            
+            if (!isRecording) {
+                // Start recording
+                isRecording = true;
+                micButton.classList.add('recording');
+                micButton.innerHTML = '<i class="fas fa-stop"></i>';
+                waveform.style.display = 'flex';
+                
+                // Simulate recording for 3 seconds
+                setTimeout(() => {
+                    stopRecording();
+                }, 3000);
+            } else {
+                stopRecording();
+            }
+        }
+
+        function stopRecording() {
+            isRecording = false;
+            const micButton = document.getElementById('micButton');
+            const waveform = document.getElementById('waveform');
+            
+            micButton.classList.remove('recording');
+            micButton.innerHTML = '<i class="fas fa-microphone"></i>';
+            waveform.style.display = 'none';
+            
+            // Simulate voice recognition
+            setTimeout(() => {
+                const randomResponse = sampleResponses[Math.floor(Math.random() * sampleResponses.length)];
+                document.getElementById('responseArea').textContent = `"${randomResponse}"`;
+                document.getElementById('nextBtn').style.display = 'inline-block';
+                responses.push(Math.floor(Math.random() * 4)); // Random score 0-3
+            }, 1000);
+        }
+
+        function skipQuestion() {
+            responses.push(0); // Default score for skipped
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex >= totalQuestions) {
+                showResults();
+            } else {
+                showQuestion();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('voiceInterface').style.display = 'none';
+            document.getElementById('screeningProgress').style.display = 'none';
+            document.getElementById('scoreDisplay').style.display = 'block';
+            
+            // Calculate score
+            const totalScore = responses.reduce((sum, score) => sum + score, 0);
+            const maxScore = totalQuestions * 3;
+            const percentage = Math.round((totalScore / maxScore) * 100);
+            
+            const scoreCircle = document.getElementById('scoreCircle');
+            const scoreAlert = document.getElementById('scoreAlert');
+            
+            scoreCircle.textContent = totalScore;
+            
+            let interpretation, recommendations, alertClass, circleClass;
+            
+            if (currentScreeningType === 'epds') {
+                if (totalScore <= 9) {
+                    interpretation = "Low risk for postpartum depression";
+                    recommendations = "Continue regular check-ups and maintain healthy habits.";
+                    alertClass = "alert-success";
+                    circleClass = "score-low";
+                } else if (totalScore <= 12) {
+                    interpretation = "Moderate risk for postpartum depression";
+                    recommendations = "Consider speaking with a healthcare provider for support.";
+                    alertClass = "alert-warning";
+                    circleClass = "score-moderate";
+                } else {
+                    interpretation = "High risk for postpartum depression";
+                    recommendations = "Please consult with a healthcare provider immediately.";
+                    alertClass = "alert-danger";
+                    circleClass = "score-high";
+                }
+            } else {
+                if (totalScore <= 4) {
+                    interpretation = "Minimal depression symptoms";
+                    recommendations = "Continue monitoring your mental health.";
+                    alertClass = "alert-success";
+                    circleClass = "score-low";
+                } else if (totalScore <= 9) {
+                    interpretation = "Mild depression symptoms";
+                    recommendations = "Consider lifestyle changes and monitoring.";
+                    alertClass = "alert-warning";
+                    circleClass = "score-moderate";
+                } else {
+                    interpretation = "Moderate to severe depression symptoms";
+                    recommendations = "Please seek professional help immediately.";
+                    alertClass = "alert-danger";
+                    circleClass = "score-high";
+                }
+            }
+            
+            scoreCircle.className = `score-circle ${circleClass}`;
+            scoreAlert.className = `alert ${alertClass}`;
+            document.getElementById('scoreInterpretation').textContent = interpretation;
+            document.getElementById('scoreRecommendations').textContent = recommendations;
+        }
+
+        function alertASHA() {
+            alert('🚨 ASHA Worker Alert Sent!\n\nPriya Sharma (ASHA ID: AS001) has been notified:\n• High-risk screening result\n• Patient requires immediate attention\n• Home visit scheduled within 24 hours\n\nSMS and app notification sent successfully.');
+        }
+
+        function saveResults() {
+            alert('💾 Results Saved!\n\nScreening results have been saved to:\n• Your health record\n• ABHA ID: 1234-5678-9012\n• Encrypted local storage\n• Sync pending for when online\n\nData is secure and portable across states.');
+        }
+
+        function startNew() {
+            document.getElementById('voiceInterface').style.display = 'none';
+            document.getElementById('screeningProgress').style.display = 'none';
+            document.getElementById('scoreDisplay').style.display = 'none';
+            currentQuestionIndex = 0;
+            responses = [];
+        }
+    </script>
+</body>
+</html>
