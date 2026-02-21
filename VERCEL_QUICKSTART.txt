@@ -1,0 +1,140 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║                    🚀 DEPLOY SAKHI TO VERCEL - 3 STEPS                   ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ METHOD 1: VERCEL DASHBOARD (NO CLI NEEDED) - EASIEST!                   │
+└──────────────────────────────────────────────────────────────────────────┘
+
+STEP 1: Go to Vercel
+   → Open: https://vercel.com/new
+   → Click: "Import Git Repository"
+   → Select: "Swaliha-CA/Sakhi"
+
+STEP 2: Configure Project
+   Root Directory:     tinkher
+   Framework Preset:   Other
+   Build Command:      (leave empty)
+   Install Command:    pip install -r requirements.txt
+   Output Directory:   .
+
+STEP 3: Deploy
+   → Click "Deploy" button
+   → Wait 2-3 minutes ☕
+   → Copy your URL: https://sakhi-xyz.vercel.app
+   → DONE! ✅
+
+STEP 4: Update API URL (Important!)
+   → Edit: tinkher/js/config.js (line 3)
+   → Edit: tinkher/frontend/js/config.js (line 3)
+   → Replace: 'https://your-vercel-backend.vercel.app'
+   → With: 'https://sakhi-xyz.vercel.app' (your actual URL)
+   → Commit and push (Vercel auto-redeploys)
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ METHOD 2: VERCEL CLI (FOR DEVELOPERS)                                   │
+└──────────────────────────────────────────────────────────────────────────┘
+
+STEP 1: Install Vercel CLI
+   npm install -g vercel
+
+STEP 2: Login
+   vercel login
+
+STEP 3: Deploy
+   cd tinkher
+   vercel
+
+   Answer prompts:
+   - Set up and deploy? Y
+   - Project name? sakhi
+   - Directory? ./
+   - Override settings? N
+
+STEP 4: Production Deploy
+   vercel --prod
+
+STEP 5: Update API URL (same as Method 1, Step 4)
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ WHAT YOU GET AFTER DEPLOYMENT                                           │
+└──────────────────────────────────────────────────────────────────────────┘
+
+✅ Live URL: https://your-project.vercel.app
+✅ Frontend: Premium UI with all 15 modules
+✅ Backend: FastAPI with all endpoints working
+✅ OCR Scanner: Working with mock data
+✅ Alternatives: 500+ products loaded
+✅ Voice AI: 12 languages including Malayalam
+✅ Notifications: Real-time alerts
+✅ Exposure Tracking: EPA limits monitoring
+✅ HTTPS: Automatic SSL certificate
+✅ CDN: Global content delivery
+✅ Auto-deploy: Push to GitHub = auto redeploy
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ TESTING YOUR DEPLOYMENT                                                 │
+└──────────────────────────────────────────────────────────────────────────┘
+
+1. Visit your Vercel URL
+2. Check API status indicator (top right) - should show "Connected"
+3. Click "OCR Product Scanner" - should open in new window
+4. Try uploading an image - should work
+5. Click "Safer Alternatives" - should show products
+6. Check all 15 modules are visible
+7. Verify Malayalam is mentioned in language lists
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ TROUBLESHOOTING                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Problem: API shows "Offline"
+Solution: Check API URL in js/config.js matches your Vercel URL
+
+Problem: Build fails
+Solution: Check requirements.txt is in tinkher directory
+
+Problem: 404 errors
+Solution: Check vercel.json routes configuration
+
+Problem: CORS errors
+Solution: Already configured! Check browser console for details
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ USEFUL COMMANDS                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+vercel                  # Deploy preview
+vercel --prod          # Deploy to production
+vercel ls              # List deployments
+vercel logs            # View logs
+vercel domains         # Manage domains
+vercel env             # Manage environment variables
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ COST (FREE TIER)                                                         │
+└──────────────────────────────────────────────────────────────────────────┘
+
+✅ 100 GB bandwidth/month
+✅ 100 GB-hours serverless execution/month
+✅ Unlimited deployments
+✅ Automatic HTTPS
+✅ Global CDN
+✅ Perfect for demos and small production!
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ NEED HELP?                                                               │
+└──────────────────────────────────────────────────────────────────────────┘
+
+📖 Read: DEPLOY_TO_VERCEL.md (detailed guide)
+📖 Read: VERCEL_DEPLOYMENT.md (technical details)
+📖 Read: DEPLOYMENT_SUMMARY.md (overview)
+🌐 Visit: https://vercel.com/docs
+💬 Issues: https://github.com/Swaliha-CA/Sakhi/issues
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                         READY TO DEPLOY? 🚀                              ║
+║                                                                          ║
+║              Go to: https://vercel.com/new                               ║
+║                  or run: vercel                                          ║
+╚══════════════════════════════════════════════════════════════════════════╝
