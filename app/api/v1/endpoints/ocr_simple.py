@@ -16,7 +16,7 @@ async def extract_text_from_image(
     file: UploadFile = File(..., description="Image file containing text to extract"),
     language: Optional[str] = Query(
         None,
-        description="Language code (en, hi, ta, te, bn). Auto-detected if not provided."
+        description="Language code (en, hi, ta, te, bn, ml). Auto-detected if not provided."
     )
 ) -> JSONResponse:
     """
@@ -33,10 +33,10 @@ async def extract_text_from_image(
         )
     
     # Validate language if provided
-    if language and language not in ["en", "hi", "ta", "te", "bn"]:
+    if language and language not in ["en", "hi", "ta", "te", "bn", "ml"]:
         raise HTTPException(
             status_code=400,
-            detail=f"Unsupported language: {language}. Supported: en, hi, ta, te, bn"
+            detail=f"Unsupported language: {language}. Supported: en, hi, ta, te, bn, ml"
         )
     
     temp_file = None
@@ -157,7 +157,7 @@ async def health_check() -> JSONResponse:
                 "status": "healthy",
                 "ocr_engine": ocr_engine,
                 "ocr_available": ocr_available,
-                "available_languages": ["en", "hi", "ta", "te", "bn"],
+                "available_languages": ["en", "hi", "ta", "te", "bn", "ml"],
                 "note": "Install pytesseract for real OCR functionality" if not ocr_available else "Using pytesseract"
             },
             "message": "OCR service is healthy"
