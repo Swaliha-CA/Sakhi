@@ -532,10 +532,6 @@ class PPDPredictionModel:
             return now + timedelta(weeks=4)  # 4 weeks
 
 
-# backward-compatibility alias used by tests
-PPDPredictionService = PPDPredictionModel
-
-
 # Global model instance
 ppd_model: Optional[PPDPredictionModel] = None
 
