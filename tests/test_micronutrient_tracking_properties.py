@@ -1,6 +1,7 @@
 """Property-based tests for micronutrient tracking."""
 
 import pytest
+from datetime import datetime
 from hypothesis import given, strategies as st, settings
 
 
