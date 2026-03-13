@@ -103,4 +103,23 @@ def sample_screenings(db_session, sample_users):
             total_score=5,
             risk_level="low",
             conducted_at=datetime.utcnow() - timedelta(days=1),
+            device_id="device_3"
+        )
+    ]
+
+    for screening in screenings:
+        db_session.add(screening)
+
+    db_session.commit()
+
+    return screenings
+
+
+def test_get_caseload(db_session, sample_screenings):
+    service = ASHAService()
+    caseload = service.get_caseload(db_session, asha_id=1)
+
+    assert caseload.total_cases == 3
+    assert caseload.high_risk_cases >= 1
+    assert caseload.critical_cases >= 0
     
