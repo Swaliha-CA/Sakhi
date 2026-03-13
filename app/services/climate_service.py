@@ -587,7 +587,3 @@ def get_climate_service() -> ClimateHealthService:
         logger.info("Climate health service initialized")
     
     return climate_service
-
-
-# backward-compatibility alias used by tests
-ClimateService = ClimateHealthService
