@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAKHI - AI-Powered Women's Health Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/premium.css">
+</head>
+<body>
+    <!-- Premium Glassmorphic Navbar -->
+    <nav class="navbar-premium">
+        <div class="container-fluid">
+            <div class="navbar-content">
+                <div class="navbar-brand-premium">
+                    <div class="logo-container">
+                        <svg width="40" height="40" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#7C3AED"/>
+                                    <stop offset="100%" style="stop-color:#EC4899"/>
+                                </linearGradient>
+                            </defs>
+                            <path d="M100 160 C100 160, 140 130, 140 100 C140 80, 125 70, 110 70 C105 70, 100 75, 100 75 C100 75, 95 70, 90 70 C75 70, 60 80, 60 100 C60 130, 100 160, 100 160 Z" fill="url(#logoGradient)"/>
+                        </svg>
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">SAKHI</span>
+                        <span class="brand-tagline">सखी</span>
+                    </div>
+                </div>
+                <div class="navbar-actions">
+                    <div class="api-status-badge">
+                        <span class="status-dot"></span>
+                        <span class="status-text">API Online</span>
+                    </div>
+                    <button class="btn-icon">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <button class="btn-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Floating Elements -->
+    <section class="hero-section">
+        <div class="hero-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-sparkles"></i>
+                    <span>AI-Powered Healthcare Platform</span>
+                </div>
+                <h1 class="hero-title">
+                    Empowering Women's Health
+                    <span class="gradient-text">Through Innovation</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Comprehensive maternal care combining toxicity scanning, PPD prediction, 
+                    and voice-first workflows designed for rural India
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Modules</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Languages</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">79%</div>
+                        <div class="stat-label">AI Accuracy</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Safe Products</div>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <button class="btn-primary-premium" onclick="scrollToModules()">
+                        <span>Explore Platform</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn-secondary-premium" onclick="window.open('http://localhost:8000/docs', '_blank')">
+                        <i class="fas fa-code"></i>
+                        <span>API Documentation</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Modules Section -->
+    <section class="modules-section" id="modules">
+        <div class="container">
+            <div class="section-header-premium">
+                <div class="section-badge">
+                    <i class="fas fa-th-large"></i>
+                    <span>Complete Feature Set</span>
+                </div>
+                <h2 class="section-title-premium">Platform Modules</h2>
+                <p class="section-subtitle-premium">
+                    Comprehensive suite of AI-powered tools for maternal health monitoring and care
+                </p>
+            </div>
+
+            <!-- Phase 1: Core Features -->
+            <div class="phase-container">
+                <div class="phase-header">
+                    <span class="phase-badge phase-live">Phase 1 - Live</span>
+                    <h3 class="phase-title">Core Features</h3>
+                </div>
+                <div class="modules-grid">
+                    <!-- OCR Scanner -->
+                    <div class="module-card-premium" data-module="ocr" onclick="openModule('ocr')">
+                        <div class="module-glow"></div>
+                        <div class="module-header">
+                            <div class="module-icon gradient-purple">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <span class="module-status live">LIVE</span>
+                        </div>
+                        <div class="module-body">
+                            <h4 class="module-title">OCR Product Scanner</h4>
+                            <p class="module-description">
+                                AI-powered label scanning with multi-language OCR and toxicity detection
+                            </p>
+                            <div class="module-features">
+                                <span class="feature-tag"><i class="fas fa-language"></i> 6 Languages</span>
+                                <span class="feature-tag"><i class="fas fa-shield-alt"></i> Toxicity Score</span>
+                            </div>
+                        </div>
+                        <div class="module-footer">
+                            <button class="btn-module">
+                                <span>Open Module</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Safer Alternatives -->
+                    <div class="module-card-premium" data-module="alternatives" onclick="openModule('alternatives')">
+                        <div class="module-glow"></div>
+                        <div class="module-header">
+                            <div class="module-icon gradient-green">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <span class="module-status live">LIVE</span>
+                        </div>
+                        <div class="module-body">
+                            <h4 class="module-title">Safer Alternatives</h4>
+                            <p class="module-description">
+                                Find toxin-free product alternatives with smart search and shopping lists
+                            </p>
+                            <div class="module-features">
+                                <span class="feature-tag"><i class="fas fa-database"></i> 500+ Products</span>
+                                <span class="feature-tag"><i class="fas fa-shopping-cart"></i> Shopping List</span>
+                            </div>
+                        </div>
+                        <div class="module-footer">
+                            <button class="btn-module">
+                                <span>Open Module</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- EDC Exposure -->
+                    <div class="module-card-premium" data-module="exposure" onclick="openModule('exposure')">
+                        <div class="module-glow"></div>
+                        <div class="module-header">
+                            <div class="module-icon gradient-red">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <span class="module-status live">LIVE</span>
+                        </div>
+                        <div class="module-body">
+                            <h4 class="module-title">EDC Exposure Tracking</h4>
+                            <p class="module-description">
+                                Monitor cumulative chemical exposure against EPA safety limits
+                            </p>
+                            <div class="module-features">
+                                <span class="feature-tag"><i class="fas fa-flask"></i> 6 EDC Types</span>
+                                <span class="feature-tag"><i class="fas fa-exclamation-triangle"></i> Risk Alerts</span>
+                            </div>
+                        </div>
+                        <div class="module-footer">
+                            <button class="btn-module">
+                                <span>Open Module</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div class="module-card-premium" data-module="notifications" onclick="openModule('notifications')">
+                        <div class="module-glow"></div>
+                        <div class="module-header">
+                            <div class="module-icon gradient-pink">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <span class="module-status live">LIVE</span>
+                        </div>
+                        <div class="module-body">
+                            <h4 class="module-title">Smart Notifications</h4>
+                            <p class="module-description">
+                                Multi-channel alerts for health updates and product safety warnings
+                            </p>
+                            <div class="module-features">
+                                <span class="feature-tag"><i class="fas fa-bolt"></i> Real-time</span>
+                                <span class="feature-tag"><i class="fas fa-mobile-alt"></i> Multi-channel</span>
+                            </div>
+                        </div>
+                        <div class="module-footer">
+                            <button class="btn-module">
+                                <span>Open Module</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2: Advanced Features -->
+            <div class="phase-container">
+                <div class="phase-header">
+                    <span class="phase-badge phase-advanced">Phase 2 - Advanced AI</span>
+                    <h3 class="phase-title">AI-Powered Features</h3>
+                </div>
+                <div class="modules-grid">
+                    <!-- Voice AI -->
+                    <div class="module-card-premium" data-module="voice" onclick="openModule('voice')">
+                        <div class="module-glow"></div>
+                        <div class="module-header">
+                            <div class="module-icon gradient-blue">
+                                <i class="fas fa-microphone-alt"></i>
+                            </div>
+                            <span class="module-status live">LIVE</span>
+                        </div>
+                        <div class="module-body">
+                            <h4 class="module-title">Voice AI Screening</h4>
+                            <p class="module-description">
+                                Voice-first EPDS & PHQ-9 screening in 12 Indic languages
+                            </p>
+                            <div class="module-features">
+                                <span class="feature-tag"><i class="fas fa-language"></i> 12 Languages</span>
+                                <span class="feature-tag"><i class="fas fa-wifi"></i> Offline Mode</span>
+                            </div>
+                        </div>
+                        <div class="module-footer">
+                            <button class="btn-module">
+                                <span>Open Module</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PPD Prediction -->
+                    <div class="module-card-premium premium-border" data-module="ppd">
+                        <div class="module-glow"></div>
+                        <div class="module-header">
+                            <div class="module-icon gradient-orange">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <span class="module-status live">LIVE</span>
+                        </div>
+                        <div class="module-body">
+                            <h4 class="module-title">PPD Risk Prediction</h4>
+                            <p class="module-description">
+                                AI-powered postpartum depression risk assessment with 79% accuracy
+                            </p>
+                            <div class="module-features">
+                                <span class="feature-tag"><i class="fas fa-chart-pie"></i> 5-Factor Model</span>
+                                <span class="feature-tag"><i class="fas fa-award"></i> 79% Accuracy</span>
+                            </div>
+                        </div>
+                        <div class="module-footer">
+                            <button class="btn-module">
+                                <span>Open Module</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ASHA Dashboard -->
+                    <div class="module-card-premium premium-border" data-module="asha">
+                        <div class="module-glow"></div>
+                        <div class="module-header">
+                            <div class="module-icon gradient-cyan">
+                                <i class="fas fa-hospital-user"></i>
+                            </div>
+                            <span class="module-status live">LIVE</span>
+                        </div>
+                        <div class="module-body">
+                            <h4 class="module-title">ASHA Dashboard</h4>
+                            <p class="module-description">
+                                Case management for ASHA workers with risk prioritization
+                            </p>
+                            <div class="module-features">
+                                <span class="feature-tag"><i class="fas fa-users"></i> 30-40 Cases</span>
+                                <span class="feature-tag"><i class="fas fa-clipboard-list"></i> Priority Queue</span>
+                            </div>
+                        </div>
+                        <div class="module-footer">
+                            <button class="btn-module">
+                                <span>Open Module</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- More modules... -->
+                    <div class="module-card-premium coming-soon" data-module="micronutrients">
+                        <div class="module-header">
+                            <div class="module-icon gradient-purple-light">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <span class="module-status coming">COMING SOON</span>
+                        </div>
+                        <div class="module-body">
+                            <h4 class="module-title">Micronutrient Tracking</h4>
+                            <p class="module-description">
+                                Lab result tracking with deficiency detection and mood correlation
+                            </p>
+                            <div class="module-features">
+                                <span class="feature-tag"><i class="fas fa-vial"></i> 6 Nutrients</span>
+                                <span class="feature-tag"><i class="fas fa-chart-area"></i> Trends</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-premium">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-text">
+                        <span class="brand-name">SAKHI</span>
+                        <span class="brand-tagline">सखी - Your Trusted Health Friend</span>
+                    </div>
+                    <p class="footer-description">
+                        AI-powered women's health platform combining toxicity scanning, 
+                        maternal care, and climate resilience for rural India.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h5>Platform</h5>
+                        <a href="#modules">Features</a>
+                        <a href="http://localhost:8000/docs" target="_blank">API Docs</a>
+                        <a href="#" onclick="window.open('https://github.com/Swaliha-CA/Sakhi', '_blank')">GitHub</a>
+                    </div>
+                    <div class="footer-section">
+                        <h5>Resources</h5>
+                        <a href="#">Documentation</a>
+                        <a href="#">Support</a>
+                        <a href="#">Community</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SAKHI Platform. Built for maternal health innovation.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/premium.js"></script>
+</body>
+</html>
