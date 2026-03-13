@@ -201,9 +201,6 @@ class BhashiniService:
         return language in self.offline_languages
 
 
-# backward-compatible alias used by tests
-VoiceService = BhashiniService
-
 class VoiceScreeningStateMachine:
     """
     State machine for voice-based screening workflows
